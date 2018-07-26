@@ -1,0 +1,227 @@
+/*
+ * Copyright (C) 2016 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.yummywakame.breakroom;
+
+import android.text.TextUtils;
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Helper methods related to requesting and receiving earthquake data from USGS.
+ */
+public final class NewsQueryUtils {
+
+    /** Tag for the log messages */
+    private static final String LOG_TAG = NewsQueryUtils.class.getSimpleName();
+
+    /**
+     * Create a private constructor because no one should ever create a {@link NewsQueryUtils} object.
+     * This class is only meant to hold static variables and methods, which can be accessed
+     * directly from the class name NewsQueryUtils (and an object instance of NewsQueryUtils is not needed).
+     */
+    private NewsQueryUtils() {
+    }
+
+    /**
+     * Query the USGS dataset and return a list of {@link NewsArticle} objects.
+     */
+    public static List<NewsArticle> fetchEarthquakeData(String requestUrl) {
+        // Create URL object
+        URL url = createUrl(requestUrl);
+
+//        // Slow the network connection down so we can see the ProgressBar spinner
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
+        // Perform HTTP request to the URL and receive a JSON response back
+        String jsonResponse = null;
+        try {
+            jsonResponse = makeHttpRequest(url);
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Problem making the HTTP request.", e);
+        }
+
+        // Extract relevant fields from the JSON response and create a list of {@link NewsArticle}s
+        List<NewsArticle> newsArticles = extractFeatureFromJson(jsonResponse);
+        Log.v(LOG_TAG, "Extracting data from JSON.");
+
+        // Return the list of {@link NewsArticle}s
+        Log.v(LOG_TAG, "Returning the list of newsArticles.");
+        return newsArticles;
+    }
+
+    /**
+     * Returns new URL object from the given string URL.
+     */
+    private static URL createUrl(String stringUrl) {
+        URL url = null;
+        try {
+            url = new URL(stringUrl);
+        } catch (MalformedURLException e) {
+            Log.e(LOG_TAG, "Problem building the URL ", e);
+        }
+        return url;
+    }
+
+    /**
+     * Make an HTTP request to the given URL and return a String as the response.
+     */
+    private static String makeHttpRequest(URL url) throws IOException {
+        String jsonResponse = "";
+
+        // If the URL is null, then return early.
+        if (url == null) {
+            Log.v(LOG_TAG, "url is null. JSON Response: " + jsonResponse);
+            return jsonResponse;
+        }
+
+        HttpURLConnection urlConnection = null;
+        InputStream inputStream = null;
+        try {
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setReadTimeout(10000 /* milliseconds */);
+            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+
+            // If the request was successful (response code 200),
+            // then read the input stream and parse the response.
+            if (urlConnection.getResponseCode() == 200) {
+                inputStream = urlConnection.getInputStream();
+                jsonResponse = readFromStream(inputStream);
+            } else {
+                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
+            }
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+                Log.v(LOG_TAG, "urlConnection != null. Disconnected urlConnection.");
+            }
+            if (inputStream != null) {
+                // Closing the input stream could throw an IOException, which is why
+                // the makeHttpRequest(URL url) method signature specifies than an IOException
+                // could be thrown.
+                Log.v(LOG_TAG, "inputStream != null. closing inputstream.");
+                inputStream.close();
+            }
+        }
+        return jsonResponse;
+    }
+
+    /**
+     * Convert the {@link InputStream} into a String which contains the
+     * whole JSON response from the server.
+     */
+    private static String readFromStream(InputStream inputStream) throws IOException {
+        StringBuilder output = new StringBuilder();
+        if (inputStream != null) {
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+            BufferedReader reader = new BufferedReader(inputStreamReader);
+            String line = reader.readLine();
+            while (line != null) {
+                output.append(line);
+                line = reader.readLine();
+            }
+        }
+        Log.v(LOG_TAG, "StringBuilder read all lines. Returning output.toString().");
+        return output.toString();
+    }
+
+    /**
+     * Return a list of {@link NewsArticle} objects that has been built up from
+     * parsing the given JSON response.
+     */
+    private static List<NewsArticle> extractFeatureFromJson(String earthquakeJSON) {
+        // If the JSON string is empty or null, then return early.
+        if (TextUtils.isEmpty(earthquakeJSON)) {
+            Log.v(LOG_TAG, "The JSON string is empty or null. Returning early.");
+            return null;
+        }
+
+        // Create an empty ArrayList that we can start adding newsArticles to
+        List<NewsArticle> newsArticles = new ArrayList<>();
+
+        // Try to parse the JSON response string. If there's a problem with the way the JSON
+        // is formatted, a JSONException exception object will be thrown.
+        // Catch the exception so the app doesn't crash, and print the error message to the logs.
+        try {
+
+            // Create a JSONObject from the JSON response string
+            JSONObject baseJsonResponse = new JSONObject(earthquakeJSON);
+
+            // Extract the JSONArray associated with the key called "features",
+            // which represents a list of features (or newsArticles).
+            JSONArray earthquakeArray = baseJsonResponse.getJSONArray("features");
+
+            // For each earthquake in the earthquakeArray, create an {@link NewsArticle} object
+            for (int i = 0; i < earthquakeArray.length(); i++) {
+
+                // Get a single newsArticle at position i within the list of newsArticles
+                JSONObject currentEarthquake = earthquakeArray.getJSONObject(i);
+
+                // For a given newsArticle, extract the JSONObject associated with the
+                // key called "properties", which represents a list of all properties
+                // for that newsArticle.
+                JSONObject properties = currentEarthquake.getJSONObject("properties");
+
+                // Extract the value for the key called "place"
+                String location = properties.getString("place");
+
+                // Extract the value for the key called "time"
+                long time = properties.getLong("time");
+
+                // Extract the value for the key called "url"
+                String url = properties.getString("url");
+
+                // Create a new {@link NewsArticle} object with the magnitude, location, time,
+                // and url from the JSON response.
+                NewsArticle newsArticle = new NewsArticle(location, time, url);
+
+                // Add the new {@link NewsArticle} to the list of newsArticles.
+                newsArticles.add(newsArticle);
+            }
+
+        } catch (JSONException e) {
+            // If an error is thrown when executing any of the above statements in the "try" block,
+            // catch the exception here, so the app doesn't crash. Print a log message
+            // with the message from the exception.
+            Log.e(LOG_TAG, "NewsQueryUtils: Problem parsing the earthquake JSON results", e);
+        }
+
+        // Return the list of newsArticles
+        return newsArticles;
+    }
+
+}

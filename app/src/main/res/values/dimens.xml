@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="list_margin">16dp</dimen>
+
+    <!-- Default screen margins, per the Material Design guidelines. -->
+    <dimen name="margin_xs">4dp</dimen>
+    <dimen name="margin_s">8dp</dimen>
+    <dimen name="margin_m">16dp</dimen>
+    <dimen name="margin_l">24dp</dimen>
+    <dimen name="margin_xxxl">48dp</dimen>
+
+    <!-- Default text sizes -->
+    <dimen name="text_size_s">16sp</dimen>
+    <dimen name="text_size_m">24sp</dimen>
+</resources>
