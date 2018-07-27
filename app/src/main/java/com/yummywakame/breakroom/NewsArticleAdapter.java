@@ -22,7 +22,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -31,7 +33,7 @@ import java.util.TimeZone;
 /**
  * An {@link NewsArticleAdapter} knows how to create a list item layout for each article
  * in the data source (a list of {@link NewsArticle} objects).
- *
+ * <p>
  * These list item layouts will be provided to an adapter view like ListView
  * to be displayed to the user.
  */
@@ -40,7 +42,7 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
     /**
      * Constructs a new {@link NewsArticleAdapter}.
      *
-     * @param context of the app
+     * @param context      of the app
      * @param newsArticles is the list of newsArticles, which is the data source of the adapter
      */
     public NewsArticleAdapter(Context context, List<NewsArticle> newsArticles) {
@@ -72,7 +74,7 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         primaryLocationView.setText(newsTitle);
 
         // Create a new Date object from the time in milliseconds of the article
-        String dateObject = currentNewsArticle.getPublishedDate();
+        String dateObject = formatDate(currentNewsArticle.getPublishedDate());
 
         // Find the TextView with view ID article_date
         TextView dateView = (TextView) listItemView.findViewById(R.id.article_date);
@@ -96,16 +98,56 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
     /**
      * Return the formatted article_date string (i.e. "Mar 3, '84") from a Date object.
      */
-    private String formatDate(Date dateObject) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yy");
-        return dateFormat.format(dateObject);
+    private String formatDate(String date) {
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yy");
+//        return dateFormat.format(dateObject);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'", Locale.getDefault());
+        // Set the time zone to where the articles are published
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        try {
+            Date articleDate = simpleDateFormat.parse(date);
+            // Set the time zone to where the articles are published
+            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+            // Grab an instance of the calendar to get the time
+            Calendar calendar = Calendar.getInstance();
+
+            // Calculate time since article was posted
+            long currentTime = calendar.getTimeInMillis();
+            long articleTime = currentTime - articleDate.getTime();
+            simpleDateFormat.applyPattern("MMM d, yy");
+            return simpleDateFormat.format(articleDate);
+
+        } catch (ParseException e) {
+            return null;
+
+        }
     }
 
     /**
      * Return the formatted date string (i.e. "4:30 PM") from a Date object.
      */
-    private String formatTime(Date dateObject) {
-        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
-        return timeFormat.format(dateObject);
+    private String formatTime(String date) {
+//        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
+//        return timeFormat.format(dateObject);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'", Locale.getDefault());
+        // Set the time zone to where the articles are published
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        try {
+            Date articleDate = simpleDateFormat.parse(date);
+            // Set the time zone to where the articles are published
+            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+            // Grab an instance of the calendar to get the time
+            Calendar calendar = Calendar.getInstance();
+
+            // Calculate time since article was posted
+            long currentTime = calendar.getTimeInMillis();
+            long articleTime = currentTime - articleDate.getTime();
+            simpleDateFormat.applyPattern("h:mm a");
+            return simpleDateFormat.format(articleDate);
+
+        } catch (ParseException e) {
+            return null;
+
+        }
     }
 }

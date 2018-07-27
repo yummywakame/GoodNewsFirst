@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity
 
     /** URL for article data from the USGS dataset */
     private static final String USGS_REQUEST_URL =
-            "https://content.guardianapis.com/search?show-fields=thumbnail%2Cbyline&api-key=ecc9f376-0d77-4fd4-82ce-81673caa525b";
-//            "https://content.guardianapis.com/search?tag=world%2Fseries%2Fthe-upside-weekly-report&order-by=newest&show-fields=all&api-key=ecc9f376-0d77-4fd4-82ce-81673caa525b";
+//            "https://content.guardianapis.com/search?show-fields=thumbnail%2Cbyline&api-key=ecc9f376-0d77-4fd4-82ce-81673caa525b";
+            "https://content.guardianapis.com/search?tag=world%2Fseries%2Fthe-upside-weekly-report&order-by=newest&show-fields=all&api-key=ecc9f376-0d77-4fd4-82ce-81673caa525b";
 
     /**
      * Constant value for the article loader ID. We can choose any integer.
