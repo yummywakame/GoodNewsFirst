@@ -101,7 +101,9 @@
                 android:paddingEnd="@dimen/margin_s"
                 android:paddingStart="@dimen/margin_s"
                 android:paddingTop="@dimen/margin_s"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Inverse"
+                android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="@+id/article_image"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Jul, 4 '18" />
@@ -116,11 +118,24 @@
                 android:paddingBottom="@dimen/margin_s"
                 android:paddingEnd="@dimen/margin_s"
                 android:paddingStart="@dimen/margin_s"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
+                android:textAppearance="@style/TextAppearance.AppCompat.Inverse"
+                android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="@+id/article_date"
                 app:layout_constraintStart_toStartOf="@+id/article_date"
                 app:layout_constraintTop_toBottomOf="@+id/article_date"
                 tools:text="08:00" />
+
+            <ImageView
+                android:id="@+id/bookmark_tail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="false"
+                android:alpha=".9"
+                android:scaleType="center"
+                app:layout_constraintEnd_toEndOf="@+id/article_date"
+                app:layout_constraintStart_toStartOf="@+id/article_date"
+                app:layout_constraintTop_toBottomOf="@+id/article_time"
+                app:srcCompat="@drawable/bookmark" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>

@@ -22,13 +22,13 @@ import android.util.Log;
 import java.util.List;
 
 /**
- * Loads a list of earthquakes by using an AsyncTask to perform the
+ * Loads a list of articles by using an AsyncTask to perform the
  * network request to the given URL.
  */
 public class NewsArticleLoader extends AsyncTaskLoader<List<NewsArticle>> {
 
     /** Tag for log messages */
-    private static final String LOG_TAG = NewsArticleLoader.class.getName();
+    private static final String LOG_TAG = NewsArticleLoader.class.getName() + " - LOG";
 
     /** Query URL */
     private String mUrl;
@@ -61,7 +61,7 @@ public class NewsArticleLoader extends AsyncTaskLoader<List<NewsArticle>> {
         }
 
         // Perform the network request, parse the response, and extract a list of newsArticles.
-        List<NewsArticle> newsArticles = NewsQueryUtils.fetchEarthquakeData(mUrl);
+        List<NewsArticle> newsArticles = NewsQueryUtils.fetchArticleData(mUrl);
         Log.v(LOG_TAG, "Performing the task of fetching the data from the URL, " +
                 "loading and returning the newsArticles result");
         return newsArticles;

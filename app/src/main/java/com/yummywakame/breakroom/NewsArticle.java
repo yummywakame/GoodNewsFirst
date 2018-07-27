@@ -15,52 +15,59 @@
  */
 package com.yummywakame.breakroom;
 
+import android.graphics.Bitmap;
 /**
- * An {@link NewsArticle} object contains information related to a single earthquake.
+ * An {@link NewsArticle} object contains information related to a single article.
  */
 public class NewsArticle {
 
-    /** Location of the earthquake */
-    private String mLocation;
+    // Publication date for the article
+    private String webPublicationDate;
 
-    /** Time of the earthquake */
-    private long mTimeInMilliseconds;
+    // Title of the article
+    private String webTitle;
 
-    /** Website URL of the earthquake */
-    private String mUrl;
+    // Url of the article
+    private String webUrl;
+
+    // Author of the article
+    private String byLine;
+
+    // Bitmap of the thumbnail of the article
+    private Bitmap thumbnail;
 
     /**
-     * Constructs a new {@link NewsArticle} object.
+     * Constructs a new {@link NewsArticle} object
      *
-     * @param location is the location where the earthquake happened
-     * @param timeInMilliseconds is the time in milliseconds (from the Epoch) when the
-     *                           earthquake happened
-     * @param url is the website URL to find more details about the earthquake
+     * @param webPublicationDate Publication date for the article
+     * @param webTitle           Title of the article
+     * @param webUrl             Url of the article
+     * @param byLine             Author of the article
+     * @param thumbnail          Url to the thumbnail of the article
      */
-    public NewsArticle(String location, long timeInMilliseconds, String url) {
-        mLocation = location;
-        mTimeInMilliseconds = timeInMilliseconds;
-        mUrl = url;
+    public NewsArticle(String webPublicationDate, String webTitle, String webUrl, String byLine, Bitmap thumbnail) {
+        this.webPublicationDate = webPublicationDate;
+        this.webTitle = webTitle;
+        this.webUrl = webUrl;
+        this.byLine = byLine;
+        this.thumbnail = thumbnail;
     }
 
-    /**
-     * Returns the location of the earthquake.
-     */
-    public String getLocation() {
-        return mLocation;
+    public String getPublishedDate() { return webPublicationDate; }
+
+    public String getTitle() {
+        return webTitle;
     }
 
-    /**
-     * Returns the time of the earthquake.
-     */
-    public long getTimeInMilliseconds() {
-        return mTimeInMilliseconds;
-    }
-
-    /**
-     * Returns the website URL to find more information about the earthquake.
-     */
     public String getUrl() {
-        return mUrl;
+        return webUrl;
+    }
+
+    public String getAuthor() {
+        return byLine;
+    }
+
+    public Bitmap getThumbnail() {
+        return thumbnail;
     }
 }

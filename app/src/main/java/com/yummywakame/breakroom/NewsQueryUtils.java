@@ -18,6 +18,9 @@ package com.yummywakame.breakroom;
 import android.text.TextUtils;
 import android.util.Log;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,12 +37,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Helper methods related to requesting and receiving earthquake data from USGS.
+ * Helper methods related to requesting and receiving article data from The Guardian.
  */
 public final class NewsQueryUtils {
 
     /** Tag for the log messages */
-    private static final String LOG_TAG = NewsQueryUtils.class.getSimpleName();
+    private static final String LOG_TAG = NewsQueryUtils.class.getSimpleName() + " - LOG";
 
     /**
      * Create a private constructor because no one should ever create a {@link NewsQueryUtils} object.
@@ -50,9 +53,9 @@ public final class NewsQueryUtils {
     }
 
     /**
-     * Query the USGS dataset and return a list of {@link NewsArticle} objects.
+     * Query the Guardian dataset and return a list of {@link NewsArticle} objects.
      */
-    public static List<NewsArticle> fetchEarthquakeData(String requestUrl) {
+    public static List<NewsArticle> fetchArticleData(String requestUrl) {
         // Create URL object
         URL url = createUrl(requestUrl);
 
@@ -76,7 +79,7 @@ public final class NewsQueryUtils {
         Log.v(LOG_TAG, "Extracting data from JSON.");
 
         // Return the list of {@link NewsArticle}s
-        Log.v(LOG_TAG, "Returning the list of newsArticles.");
+        Log.v(LOG_TAG, "Returning the list of news articles.");
         return newsArticles;
     }
 
@@ -88,7 +91,7 @@ public final class NewsQueryUtils {
         try {
             url = new URL(stringUrl);
         } catch (MalformedURLException e) {
-            Log.e(LOG_TAG, "Problem building the URL ", e);
+            Log.e(LOG_TAG, "Problem building the URL.", e);
         }
         return url;
     }
@@ -101,7 +104,7 @@ public final class NewsQueryUtils {
 
         // If the URL is null, then return early.
         if (url == null) {
-            Log.v(LOG_TAG, "url is null. JSON Response: " + jsonResponse);
+            Log.v(LOG_TAG, "URL is null. JSON Response: " + jsonResponse);
             return jsonResponse;
         }
 
@@ -123,7 +126,7 @@ public final class NewsQueryUtils {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
+            Log.e(LOG_TAG, "Problem retrieving the article JSON results.", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -133,7 +136,7 @@ public final class NewsQueryUtils {
                 // Closing the input stream could throw an IOException, which is why
                 // the makeHttpRequest(URL url) method signature specifies than an IOException
                 // could be thrown.
-                Log.v(LOG_TAG, "inputStream != null. closing inputstream.");
+                Log.v(LOG_TAG, "inputStream != null. closing input stream.");
                 inputStream.close();
             }
         }
@@ -155,7 +158,7 @@ public final class NewsQueryUtils {
                 line = reader.readLine();
             }
         }
-        Log.v(LOG_TAG, "StringBuilder read all lines. Returning output.toString().");
+        Log.v(LOG_TAG, "StringBuilder has read all lines. Returning output.toString().");
         return output.toString();
     }
 
@@ -163,9 +166,9 @@ public final class NewsQueryUtils {
      * Return a list of {@link NewsArticle} objects that has been built up from
      * parsing the given JSON response.
      */
-    private static List<NewsArticle> extractFeatureFromJson(String earthquakeJSON) {
+    private static List<NewsArticle> extractFeatureFromJson(String articleJSON) {
         // If the JSON string is empty or null, then return early.
-        if (TextUtils.isEmpty(earthquakeJSON)) {
+        if (TextUtils.isEmpty(articleJSON)) {
             Log.v(LOG_TAG, "The JSON string is empty or null. Returning early.");
             return null;
         }
@@ -179,49 +182,59 @@ public final class NewsQueryUtils {
         try {
 
             // Create a JSONObject from the JSON response string
-            JSONObject baseJsonResponse = new JSONObject(earthquakeJSON);
+            JSONObject jsonObjectRoot = new JSONObject(articleJSON);
 
-            // Extract the JSONArray associated with the key called "features",
+            // Extract the JSONArray associated with the key called "response",
             // which represents a list of features (or newsArticles).
-            JSONArray earthquakeArray = baseJsonResponse.getJSONArray("features");
+            JSONObject jsonObjectResponse = jsonObjectRoot.getJSONObject("response");
 
-            // For each earthquake in the earthquakeArray, create an {@link NewsArticle} object
-            for (int i = 0; i < earthquakeArray.length(); i++) {
+            // Grab the results array from the base object
+            JSONArray jsonArrayResults = jsonObjectResponse.getJSONArray("results");
 
+            // For each article in the articleArray, create an {@link NewsArticle} object
+            for (int i = 0; i < jsonArrayResults.length(); i++) {
                 // Get a single newsArticle at position i within the list of newsArticles
-                JSONObject currentEarthquake = earthquakeArray.getJSONObject(i);
+                JSONObject currentArticle = jsonArrayResults.getJSONObject(i);
 
-                // For a given newsArticle, extract the JSONObject associated with the
-                // key called "properties", which represents a list of all properties
-                // for that newsArticle.
-                JSONObject properties = currentEarthquake.getJSONObject("properties");
+                String webPublicationDate = currentArticle.getString("webPublicationDate");
+                String webTitle = currentArticle.getString("webTitle");
+                String webUrl = currentArticle.getString("webUrl");
 
-                // Extract the value for the key called "place"
-                String location = properties.getString("place");
+                JSONObject jsonObjectFields = currentArticle.getJSONObject("fields");
 
-                // Extract the value for the key called "time"
-                long time = properties.getLong("time");
+                String byLine = jsonObjectFields.optString("byline");
+                String thumbnail = jsonObjectFields.optString("thumbnail");
 
-                // Extract the value for the key called "url"
-                String url = properties.getString("url");
-
-                // Create a new {@link NewsArticle} object with the magnitude, location, time,
-                // and url from the JSON response.
-                NewsArticle newsArticle = new NewsArticle(location, time, url);
-
-                // Add the new {@link NewsArticle} to the list of newsArticles.
-                newsArticles.add(newsArticle);
+                // Add a new NewsArticle from the data
+                newsArticles.add(new NewsArticle(webPublicationDate, webTitle, webUrl, byLine, downloadBitmap(thumbnail)));
             }
 
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
-            Log.e(LOG_TAG, "NewsQueryUtils: Problem parsing the earthquake JSON results", e);
+            Log.e(LOG_TAG, "NewsQueryUtils: Problem parsing the article JSON results", e);
         }
 
         // Return the list of newsArticles
         return newsArticles;
+    }
+
+    /**
+     * Load an image from a URL and return a {@link Bitmap}
+     *
+     * @param url string of the URL link to the image
+     * @return Bitmap of the image
+     */
+    private static Bitmap downloadBitmap(String url) {
+        Bitmap bitmap = null;
+        try {
+            InputStream inputStream = new URL(url).openStream();
+            bitmap = BitmapFactory.decodeStream(inputStream);
+        } catch (Exception e) {
+            Log.e(LOG_TAG, e.getMessage());
+        }
+        return bitmap;
     }
 
 }
