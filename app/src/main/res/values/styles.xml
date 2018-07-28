@@ -19,7 +19,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDark</item>
-        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="colorAccent">@color/secondaryHilight</item>
     </style>
 
     <!-- Article Title Text -->
@@ -41,7 +41,7 @@
     <style name="ArticleAuthorText" parent="@style/TextAppearance.AppCompat.Body2">
         <item name="android:fontFamily">@font/ubuntu_italic</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/secondaryColor</item>
+        <item name="android:textColor">@color/secondaryHilight</item>
     </style>
 
 </resources>

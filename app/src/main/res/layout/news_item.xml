@@ -21,7 +21,6 @@
         android:id="@+id/playlist_cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_s"
         android:layout_marginEnd="@dimen/margin_s"
         android:layout_marginStart="@dimen/margin_s"
         android:layout_marginTop="@dimen/margin_s"
@@ -29,6 +28,8 @@
         android:stateListAnimator="@animator/lift_on_touch"
         app:cardCornerRadius="5dp"
         app:cardElevation="4dp"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

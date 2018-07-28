@@ -4,25 +4,16 @@
     <color name="primaryColor">#1b2836</color>
     <!-- Primary dark color of the app (shown in the status bar) -->
     <color name="primaryDark">#141d26</color>
-    <!-- Primary light color used for text -->
-    <color name="primaryLight">#8899a6</color>
-    <!-- Accent color of the app -->
-    <color name="secondaryColor">#1da1f2</color>
-
-    <color name="primaryLightColor">#ff5bc0</color>
-    <color name="primaryMediumColor">#ee0290</color>
-    <color name="primaryDarkColor">#b50062</color>
-    <color name="secondaryLightColor">#80e27e</color>
-    <color name="secondaryMediumColor">#4caf50</color>
-    <color name="secondaryDarkColor">#087f23</color>
-    <color name="primaryTextColor">#ffffff</color>
-    <color name="secondaryTextColor">#000000</color>
-    <color name="backgroundColor">#2e3a47</color>
+    <!-- color used for cardview background -->
     <color name="backgroundColorOverlay">#141d26</color>
-
-    <color name="color1">#141d26</color>
-    <color name="color2">#1b2836</color>
-    <color name="color3">#8899a6</color>
-    <color name="color4">#d13085</color>
-    <color name="color5">#1da1f2</color>
+    <!-- App's background color -->
+    <color name="backgroundColor">#2e3a47</color>
+    <!-- Accent color of the app -->
+    <color name="primaryHilight">#ee0290</color>
+    <!-- Accent color of the app -->
+    <color name="secondaryHilight">#1da1f2</color>
+    <!-- Primary Text Color -->
+    <color name="primaryTextColor">#ffffff</color>
+    <!-- Primary Light Text Color -->
+    <color name="primaryLight">#8899a6</color>
 </resources>

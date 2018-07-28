@@ -69,10 +69,8 @@ public final class NewsQueryUtils {
 
         // Extract relevant fields from the JSON response and create a list of {@link NewsArticle}s
         List<NewsArticle> newsArticles = extractFeatureFromJson(jsonResponse);
-        Log.v(LOG_TAG, "Extracting data from JSON.");
 
         // Return the list of {@link NewsArticle}s
-        Log.v(LOG_TAG, "Returning the list of news articles.");
         return newsArticles;
     }
 
@@ -84,7 +82,6 @@ public final class NewsQueryUtils {
         try {
             url = new URL(stringUrl);
         } catch (MalformedURLException e) {
-            Log.e(LOG_TAG, "Problem building the URL.", e);
         }
         return url;
     }
@@ -97,7 +94,6 @@ public final class NewsQueryUtils {
 
         // If the URL is null, then return early.
         if (url == null) {
-            Log.v(LOG_TAG, "URL is null. JSON Response: " + jsonResponse);
             return jsonResponse;
         }
 
@@ -123,7 +119,6 @@ public final class NewsQueryUtils {
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
-                Log.v(LOG_TAG, "urlConnection != null. Disconnected urlConnection.");
             }
             if (inputStream != null) {
                 // Closing the input stream could throw an IOException, which is why
@@ -151,7 +146,6 @@ public final class NewsQueryUtils {
                 line = reader.readLine();
             }
         }
-        Log.v(LOG_TAG, "StringBuilder has read all lines. Returning output.toString().");
         return output.toString();
     }
 

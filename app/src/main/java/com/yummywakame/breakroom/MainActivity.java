@@ -20,7 +20,6 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
-import android.support.v7.widget.Toolbar;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -39,11 +38,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements LoaderCallbacks<List<NewsArticle>> {
 
-    private static final String LOG_TAG = MainActivity.class.getName() + " - LOG";
-
-    /** URL for article data from the USGS dataset */
-    private static final String USGS_REQUEST_URL =
-//            "https://content.guardianapis.com/search?show-fields=thumbnail%2Cbyline&api-key=ecc9f376-0d77-4fd4-82ce-81673caa525b";
+    /** URL for article data from the Guardian dataset */
+    private static final String GUARDIAN_REQUEST_URL =
             "https://content.guardianapis.com/search?tag=world%2Fseries%2Fthe-upside-weekly-report&order-by=newest&show-fields=all&show-tags=contributor&api-key=ecc9f376-0d77-4fd4-82ce-81673caa525b";
 
     /**
@@ -118,7 +114,6 @@ public class MainActivity extends AppCompatActivity
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
             loaderManager.initLoader(ARTICLE_LOADER_ID, null, this);
-            Log.v(LOG_TAG, "Initialized the Loader.");
 
         } else {
             // Otherwise, display error
@@ -135,8 +130,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public Loader<List<NewsArticle>> onCreateLoader(int i, Bundle bundle) {
         // Create a new loader for the given URL
-        Log.v(LOG_TAG, "Created a new NewsArticleLoader for: " + USGS_REQUEST_URL);
-        return new NewsArticleLoader(this, USGS_REQUEST_URL);
+        return new NewsArticleLoader(this, GUARDIAN_REQUEST_URL);
     }
 
     @Override
@@ -149,13 +143,11 @@ public class MainActivity extends AppCompatActivity
         mEmptyStateTextView.setText(R.string.no_articles);
 
         // Clear the adapter of previous article data
-        Log.v(LOG_TAG, "Cleared mAdapter of previous article data.");
         mAdapter.clear();
 
         // If there is a valid list of {@link NewsArticle}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
         if (newsArticles != null && !newsArticles.isEmpty()) {
-            Log.v(LOG_TAG, "Added list of Articles to mAdapter");
             mAdapter.addAll(newsArticles);
         }
     }
@@ -163,7 +155,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLoaderReset(Loader<List<NewsArticle>> loader) {
         // Loader reset, so we can clear out our existing data.
-        Log.v(LOG_TAG, "Cleared mAdapter of previous article data.");
         mAdapter.clear();
     }
 }

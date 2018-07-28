@@ -28,7 +28,6 @@ import java.util.List;
 public class NewsArticleLoader extends AsyncTaskLoader<List<NewsArticle>> {
 
     /** Tag for log messages */
-    private static final String LOG_TAG = NewsArticleLoader.class.getName() + " - LOG";
 
     /** Query URL */
     private String mUrl;
@@ -46,7 +45,6 @@ public class NewsArticleLoader extends AsyncTaskLoader<List<NewsArticle>> {
 
     @Override
     protected void onStartLoading() {
-        Log.v(LOG_TAG, "forceLoad() initiated, which starts the Loader.");
         forceLoad();
     }
 
@@ -56,14 +54,11 @@ public class NewsArticleLoader extends AsyncTaskLoader<List<NewsArticle>> {
     @Override
     public List<NewsArticle> loadInBackground() {
         if (mUrl == null) {
-            Log.v(LOG_TAG, "mUrl is null.");
             return null;
         }
 
         // Perform the network request, parse the response, and extract a list of newsArticles.
         List<NewsArticle> newsArticles = NewsQueryUtils.fetchArticleData(mUrl);
-        Log.v(LOG_TAG, "Performing the task of fetching the data from the URL, " +
-                "loading and returning the newsArticles result");
         return newsArticles;
     }
 }
