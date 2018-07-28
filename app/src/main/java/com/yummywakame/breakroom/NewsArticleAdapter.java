@@ -68,10 +68,17 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
 
         // Get the title from the NewsArticle object
         String newsTitle = currentNewsArticle.getTitle();
-        // Find the TextView with view ID location
+        // Find the TextView with view ID article_title
         TextView titleView = listItemView.findViewById(R.id.article_title);
         // Display the location of the current article in that TextView
         titleView.setText(newsTitle);
+
+        // Get the trailtext from the NewsArticle object
+        String newsTrail = currentNewsArticle.getTrailText();
+        // Find the TextView with view ID trail article_trailtext
+        TextView trailView = listItemView.findViewById(R.id.article_trailtext);
+        // Display the location of the current article in that TextView
+        trailView.setText(newsTrail);
 
         // Create a new Date object from the time in milliseconds of the article
         // Format the article_date string (i.e. "Mar 3, 1984")
@@ -83,14 +90,14 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
 
         // Format the time string (i.e. "4:30PM")
         String formattedTime = formatTime(currentNewsArticle.getPublishedDate());
-        // Find the TextView with view ID time
+        // Find the TextView with view ID article_time
         TextView timeView = listItemView.findViewById(R.id.article_time);
         // Display the time of the current article in that TextView
         timeView.setText(formattedTime);
 
-        // Find the TextView with view ID article_author
+        // GEt the author from the NewsArticle object
         String newsAuthor = currentNewsArticle.getAuthor();
-        // Find the TextView with view ID location
+        // Find the TextView with view ID article_author
         TextView authorView = listItemView.findViewById(R.id.article_author);
         // Display the location of the current article in that TextView
         authorView.setText(newsAuthor);

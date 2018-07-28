@@ -27,6 +27,9 @@ public class NewsArticle {
     // Title of the article
     private String webTitle;
 
+    // Intro of the article
+    private String webTrailText;
+
     // Url of the article
     private String webUrl;
 
@@ -41,13 +44,15 @@ public class NewsArticle {
      *
      * @param webPublicationDate Publication date for the article
      * @param webTitle           Title of the article
+     * @param webTrailText       TrailText of the article
      * @param webUrl             Url of the article
      * @param byLine             Author of the article
      * @param thumbnail          Url to the thumbnail of the article
      */
-    public NewsArticle(String webPublicationDate, String webTitle, String webUrl, String byLine, Bitmap thumbnail) {
+    public NewsArticle(String webPublicationDate, String webTitle, String webTrailText, String webUrl, String byLine, Bitmap thumbnail) {
         this.webPublicationDate = webPublicationDate;
         this.webTitle = webTitle;
+        this.webTrailText = webTrailText;
         this.webUrl = webUrl;
         this.byLine = byLine;
         this.thumbnail = thumbnail;
@@ -57,6 +62,10 @@ public class NewsArticle {
 
     public String getTitle() {
         return webTitle;
+    }
+
+    public String getTrailText() {
+        return webTrailText;
     }
 
     public String getUrl() {

@@ -59,13 +59,6 @@ public final class NewsQueryUtils {
         // Create URL object
         URL url = createUrl(requestUrl);
 
-//        // Slow the network connection down so we can see the ProgressBar spinner
-//        try {
-//            Thread.sleep(2000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-
         // Perform HTTP request to the URL and receive a JSON response back
         String jsonResponse = null;
         try {
@@ -202,11 +195,12 @@ public final class NewsQueryUtils {
 
                 JSONObject jsonObjectFields = currentArticle.getJSONObject("fields");
 
+                String webTrailText = jsonObjectFields.optString("trailText");
                 String byLine = jsonObjectFields.optString("byline");
                 String thumbnail = jsonObjectFields.optString("thumbnail");
 
                 // Add a new NewsArticle from the data
-                newsArticles.add(new NewsArticle(webPublicationDate, webTitle, webUrl, byLine, downloadBitmap(thumbnail)));
+                newsArticles.add(new NewsArticle(webPublicationDate, webTitle, webTrailText, webUrl, byLine, downloadBitmap(thumbnail)));
             }
 
         } catch (JSONException e) {

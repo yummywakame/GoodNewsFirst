@@ -4,6 +4,8 @@
     <color name="primaryColor">#1b2836</color>
     <!-- Primary dark color of the app (shown in the status bar) -->
     <color name="primaryDark">#141d26</color>
+    <!-- Primary light color used for text -->
+    <color name="primaryLight">#8899a6</color>
     <!-- Accent color of the app -->
     <color name="secondaryColor">#1da1f2</color>
 
