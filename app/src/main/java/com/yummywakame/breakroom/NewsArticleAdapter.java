@@ -16,19 +16,19 @@
 package com.yummywakame.breakroom;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.TimeZone;
 
 /**
  * An {@link NewsArticleAdapter} knows how to create a list item layout for each article
@@ -69,85 +69,75 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         // Get the title from the NewsArticle object
         String newsTitle = currentNewsArticle.getTitle();
         // Find the TextView with view ID location
-        TextView primaryLocationView = listItemView.findViewById(R.id.article_title);
+        TextView titleView = listItemView.findViewById(R.id.article_title);
         // Display the location of the current article in that TextView
-        primaryLocationView.setText(newsTitle);
+        titleView.setText(newsTitle);
 
         // Create a new Date object from the time in milliseconds of the article
-        String dateObject = formatDate(currentNewsArticle.getPublishedDate());
-
+        // Format the article_date string (i.e. "Mar 3, 1984")
+        String formattedDate = formatDate(currentNewsArticle.getPublishedDate());
         // Find the TextView with view ID article_date
         TextView dateView = (TextView) listItemView.findViewById(R.id.article_date);
-        // Format the article_date string (i.e. "Mar 3, 1984")
-        String formattedDate = formatDate(dateObject);
         // Display the article_date of the current article in that TextView
         dateView.setText(formattedDate);
 
+        // Format the time string (i.e. "4:30PM")
+        String formattedTime = formatTime(currentNewsArticle.getPublishedDate());
         // Find the TextView with view ID time
         TextView timeView = listItemView.findViewById(R.id.article_time);
-        // Format the time string (i.e. "4:30PM")
-        String formattedTime = formatTime(dateObject);
         // Display the time of the current article in that TextView
         timeView.setText(formattedTime);
+
+        // Find the TextView with view ID article_author
+        String newsAuthor = currentNewsArticle.getAuthor();
+        // Find the TextView with view ID location
+        TextView authorView = listItemView.findViewById(R.id.article_author);
+        // Display the location of the current article in that TextView
+        authorView.setText(newsAuthor);
+
+        // Get the Bitmap image from the NewsArticle object
+        Bitmap newsPhoto = currentNewsArticle.getThumbnail();
+        // Find the ImageView with the ID article_image
+        ImageView photoView = listItemView.findViewById(R.id.article_image);
+        // Display the image in that ImageView
+        photoView.setImageBitmap(newsPhoto);
+
 
         // Return the list item view that is now showing the appropriate data
         return listItemView;
     }
 
-
     /**
-     * Return the formatted article_date string (i.e. "Mar 3, '84") from a Date object.
+     * Return the formatted time string (i.e. "Mar 3, '84") from a Date object.
      */
     private String formatDate(String date) {
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yy");
-//        return dateFormat.format(dateObject);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'", Locale.getDefault());
-        // Set the time zone to where the articles are published
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        final SimpleDateFormat inputParser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault());
+
+        Date date_out = null;
         try {
-            Date articleDate = simpleDateFormat.parse(date);
-            // Set the time zone to where the articles are published
-            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-            // Grab an instance of the calendar to get the time
-            Calendar calendar = Calendar.getInstance();
-
-            // Calculate time since article was posted
-            long currentTime = calendar.getTimeInMillis();
-            long articleTime = currentTime - articleDate.getTime();
-            simpleDateFormat.applyPattern("MMM d, yy");
-            return simpleDateFormat.format(articleDate);
-
-        } catch (ParseException e) {
-            return null;
-
+            date_out = inputParser.parse(date);
+        } catch (final ParseException e) {
+            e.printStackTrace();
         }
+
+        final SimpleDateFormat outputFormatter = new SimpleDateFormat("MMM d ''yy", Locale.US);
+        return outputFormatter.format(date_out);
     }
 
     /**
      * Return the formatted date string (i.e. "4:30 PM") from a Date object.
      */
     private String formatTime(String date) {
-//        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
-//        return timeFormat.format(dateObject);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'", Locale.getDefault());
-        // Set the time zone to where the articles are published
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        final SimpleDateFormat inputParser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault());
+
+        Date date_out = null;
         try {
-            Date articleDate = simpleDateFormat.parse(date);
-            // Set the time zone to where the articles are published
-            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-            // Grab an instance of the calendar to get the time
-            Calendar calendar = Calendar.getInstance();
-
-            // Calculate time since article was posted
-            long currentTime = calendar.getTimeInMillis();
-            long articleTime = currentTime - articleDate.getTime();
-            simpleDateFormat.applyPattern("h:mm a");
-            return simpleDateFormat.format(articleDate);
-
-        } catch (ParseException e) {
-            return null;
-
+            date_out = inputParser.parse(date);
+        } catch (final ParseException e) {
+            e.printStackTrace();
         }
+
+        final SimpleDateFormat outputFormatter = new SimpleDateFormat("h:mm a", Locale.US);
+        return outputFormatter.format(date_out);
     }
 }

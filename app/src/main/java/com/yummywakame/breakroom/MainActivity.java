@@ -20,6 +20,7 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.support.v7.widget.Toolbar;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -43,13 +44,16 @@ public class MainActivity extends AppCompatActivity
     /** URL for article data from the USGS dataset */
     private static final String USGS_REQUEST_URL =
 //            "https://content.guardianapis.com/search?show-fields=thumbnail%2Cbyline&api-key=ecc9f376-0d77-4fd4-82ce-81673caa525b";
-            "https://content.guardianapis.com/search?tag=world%2Fseries%2Fthe-upside-weekly-report&order-by=newest&show-fields=all&api-key=ecc9f376-0d77-4fd4-82ce-81673caa525b";
+            "https://content.guardianapis.com/search?tag=world%2Fseries%2Fthe-upside-weekly-report&order-by=newest&show-fields=all&show-tags=contributor&api-key=ecc9f376-0d77-4fd4-82ce-81673caa525b";
 
     /**
      * Constant value for the article loader ID. We can choose any integer.
      * This really only comes into play if you're using multiple loaders.
      */
     private static final int ARTICLE_LOADER_ID = 1;
+
+    /** ListView that holds the articles **/
+    private ListView articleListView;
 
     /** Adapter for the list of articles */
     private NewsArticleAdapter mAdapter;
@@ -66,7 +70,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         // Find a reference to the {@link ListView} in the layout
-        ListView articleListView = findViewById(R.id.list);
+        articleListView = findViewById(R.id.list);
 
         // Find the empty_view that is only visible when the list has no items
         mEmptyStateTextView = findViewById(R.id.empty_view);

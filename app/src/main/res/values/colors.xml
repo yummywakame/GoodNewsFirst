@@ -1,11 +1,11 @@
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
     <!-- Primary color of the app (shown in the app bar) -->
-    <color name="primaryColor">#4caf50</color>
-    <!-- Accent color of the app -->
-    <color name="secondaryColor">#ee0290</color>
+    <color name="primaryColor">#1b2836</color>
     <!-- Primary dark color of the app (shown in the status bar) -->
-    <color name="primaryDark">#087f23</color>
+    <color name="primaryDark">#141d26</color>
+    <!-- Accent color of the app -->
+    <color name="secondaryColor">#1da1f2</color>
 
     <color name="primaryLightColor">#ff5bc0</color>
     <color name="primaryMediumColor">#ee0290</color>
@@ -15,6 +15,12 @@
     <color name="secondaryDarkColor">#087f23</color>
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#000000</color>
-    <color name="backgroundColor">#424250</color>
-    <color name="backgroundColorOverlay">#33333d</color>
+    <color name="backgroundColor">#2e3a47</color>
+    <color name="backgroundColorOverlay">#141d26</color>
+
+    <color name="color1">#141d26</color>
+    <color name="color2">#1b2836</color>
+    <color name="color3">#8899a6</color>
+    <color name="color4">#d13085</color>
+    <color name="color5">#1da1f2</color>
 </resources>

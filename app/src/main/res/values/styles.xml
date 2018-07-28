@@ -16,10 +16,25 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/secondaryDarkColor</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
         <item name="colorAccent">@color/secondaryColor</item>
+    </style>
+
+    <!-- Font Libre BaskerVille Regular -->
+    <style name="LibreBaskerVilleRegular_Text_Appearance">
+        <item name="android:fontFamily">@font/libre_baskerville</item>
+    </style>
+
+    <!-- Font Libre BaskerVille Bold -->
+    <style name="LibreBaskerVilleRegular_Bold_Text_Appearance">
+        <item name="android:fontFamily">@font/libre_baskerville_bold</item>
+    </style>
+
+    <!-- Font Libre BaskerVille Italic -->
+    <style name="LibreBaskerVilleRegular_Italic_Text_Appearance">
+        <item name="android:fontFamily">@font/libre_baskerville_italic</item>
     </style>
 
 </resources>
