@@ -32,31 +32,16 @@
 
     <!-- Article TrailText Text -->
     <style name="ArticleTrailText" parent="@style/TextAppearance.AppCompat.Body2">
-        <item name="android:fontFamily">@font/libre_baskerville</item>
+        <item name="android:fontFamily">@font/ubuntu</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/primaryLight</item>
     </style>
 
     <!-- Article Author Text -->
     <style name="ArticleAuthorText" parent="@style/TextAppearance.AppCompat.Body2">
-        <item name="android:fontFamily">@font/libre_baskerville_italic</item>
+        <item name="android:fontFamily">@font/ubuntu_italic</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/secondaryColor</item>
-    </style>
-
-    <!-- Font Libre BaskerVille Regular -->
-    <style name="LibreBaskerVilleRegular_Text_Appearance">
-        <item name="android:fontFamily">@font/libre_baskerville</item>
-    </style>
-
-    <!-- Font Libre BaskerVille Bold -->
-    <style name="LibreBaskerVilleRegular_Bold_Text_Appearance">
-        <item name="android:fontFamily">@font/libre_baskerville_bold</item>
-    </style>
-
-    <!-- Font Libre BaskerVille Italic -->
-    <style name="LibreBaskerVilleRegular_Italic_Text_Appearance">
-        <item name="android:fontFamily">@font/libre_baskerville_italic</item>
     </style>
 
 </resources>

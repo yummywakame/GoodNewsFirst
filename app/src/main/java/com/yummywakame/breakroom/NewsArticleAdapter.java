@@ -74,21 +74,21 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         titleView.setText(newsTitle);
 
         // Get the trailtext from the NewsArticle object
-        String newsTrail = currentNewsArticle.getTrailText();
+        String newsTrail = currentNewsArticle.getTrailText()+".";
         // Find the TextView with view ID trail article_trailtext
         TextView trailView = listItemView.findViewById(R.id.article_trailtext);
         // Display the location of the current article in that TextView
         trailView.setText(newsTrail);
 
         // Create a new Date object from the time in milliseconds of the article
-        // Format the article_date string (i.e. "Mar 3, 1984")
+        // Format the article_date string (i.e. "Mar 3, '18")
         String formattedDate = formatDate(currentNewsArticle.getPublishedDate());
         // Find the TextView with view ID article_date
         TextView dateView = (TextView) listItemView.findViewById(R.id.article_date);
         // Display the article_date of the current article in that TextView
         dateView.setText(formattedDate);
 
-        // Format the time string (i.e. "4:30PM")
+        // Format the time string (i.e. "4:30 PM")
         String formattedTime = formatTime(currentNewsArticle.getPublishedDate());
         // Find the TextView with view ID article_time
         TextView timeView = listItemView.findViewById(R.id.article_time);
@@ -96,7 +96,7 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         timeView.setText(formattedTime);
 
         // GEt the author from the NewsArticle object
-        String newsAuthor = currentNewsArticle.getAuthor();
+        String newsAuthor = "By: " + currentNewsArticle.getAuthor() + " ";
         // Find the TextView with view ID article_author
         TextView authorView = listItemView.findViewById(R.id.article_author);
         // Display the location of the current article in that TextView
@@ -109,13 +109,12 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         // Display the image in that ImageView
         photoView.setImageBitmap(newsPhoto);
 
-
         // Return the list item view that is now showing the appropriate data
         return listItemView;
     }
 
     /**
-     * Return the formatted time string (i.e. "Mar 3, '84") from a Date object.
+     * Return the formatted time string (i.e. "Mar 3, '18") from a Date object.
      */
     private String formatDate(String date) {
         final SimpleDateFormat inputParser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault());
@@ -126,7 +125,6 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         } catch (final ParseException e) {
             e.printStackTrace();
         }
-
         final SimpleDateFormat outputFormatter = new SimpleDateFormat("MMM d ''yy", Locale.US);
         return outputFormatter.format(date_out);
     }
@@ -143,7 +141,6 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         } catch (final ParseException e) {
             e.printStackTrace();
         }
-
         final SimpleDateFormat outputFormatter = new SimpleDateFormat("h:mm a", Locale.US);
         return outputFormatter.format(date_out);
     }
