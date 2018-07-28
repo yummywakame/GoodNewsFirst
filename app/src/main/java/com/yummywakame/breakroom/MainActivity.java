@@ -24,6 +24,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +33,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +41,12 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements LoaderCallbacks<List<NewsArticle>> {
 
+    /** Set up swipe to refresh functionality */
+    SwipeRefreshLayout swipeLayout;
+
     /** URL for article data from the Guardian dataset */
     private static final String GUARDIAN_REQUEST_URL =
             "https://content.guardianapis.com/search?tag=world%2Fseries%2Fthe-upside-weekly-report&order-by=newest&show-fields=all&show-tags=contributor&api-key=ecc9f376-0d77-4fd4-82ce-81673caa525b";
-
     /**
      * Constant value for the article loader ID. We can choose any integer.
      * This really only comes into play if you're using multiple loaders.
@@ -124,6 +129,32 @@ public class MainActivity extends AppCompatActivity
             // Update empty state with no connection error message
             mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
+
+        // Getting SwipeContainerLayout
+        swipeLayout = findViewById(R.id.swipe_container);
+        // Adding Listener
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code here
+                Toast.makeText(getApplicationContext(), "Works!", Toast.LENGTH_LONG).show();
+                // To keep animation for 4 seconds
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
+                        // Stop animation (This will be after 3 seconds)
+                        swipeLayout.setRefreshing(false);
+                    }
+                }, 4000); // Delay in millis
+            }
+        });
+
+        // Scheme colors for animation
+        swipeLayout.setColorSchemeColors(
+                getResources().getColor(android.R.color.holo_blue_bright),
+                getResources().getColor(android.R.color.holo_green_light),
+                getResources().getColor(android.R.color.holo_orange_light),
+                getResources().getColor(android.R.color.holo_red_light)
+        );
 
     }
 
