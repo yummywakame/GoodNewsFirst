@@ -44,13 +44,14 @@ public class MainActivity extends AppCompatActivity
     /** Set up swipe to refresh functionality */
     SwipeRefreshLayout swipeLayout;
 
-    /** API Key Value */
+    /** API Key Value which you need to store in your gradle.properties file as:
+     *  GoodNewsFirst_GuardianApp_ApiKey="your-api-key-would-go-here" */
     private static final String apiKey = BuildConfig.ApiKey;
 
     /** URL for article data from the Guardian dataset */
     private static final String GUARDIAN_REQUEST_URL =
             "https://content.guardianapis.com/search?tag=world%2Fseries%2Fthe-upside-weekly-report"
-                    +"&order-by=newest&show-fields=all&show-tags=contributor"
+                    + "&order-by=newest&show-fields=all&show-tags=contributor"
                     + "&api-key=" + apiKey;
     /**
      * Constant value for the article loader ID. We can choose any integer.

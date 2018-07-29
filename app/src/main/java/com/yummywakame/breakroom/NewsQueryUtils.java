@@ -192,12 +192,13 @@ public final class NewsQueryUtils {
                 // Get a single newsArticle at position i within the list of newsArticles
                 JSONObject currentArticle = jsonArrayResults.getJSONObject(i);
 
+                webUrl = currentArticle.getString("webUrl");
+
                 // Target the fields object that contains all the elements we need
                 JSONObject jsonObjectFields = currentArticle.getJSONObject("fields");
 
                 webPublicationDate = jsonObjectFields.getString("firstPublicationDate");
                 webTitle = jsonObjectFields.getString("headline");
-                webUrl = jsonObjectFields.getString("shortUrl");
                 webTrailText = jsonObjectFields.optString("trailText");
                 byLine = jsonObjectFields.optString("byline");
                 thumbnail = jsonObjectFields.optString("thumbnail");
