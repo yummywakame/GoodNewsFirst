@@ -82,6 +82,7 @@ public final class NewsQueryUtils {
         try {
             url = new URL(stringUrl);
         } catch (MalformedURLException e) {
+            Log.e(LOG_TAG, "Problem building the URL.", e);
         }
         return url;
     }
@@ -154,6 +155,13 @@ public final class NewsQueryUtils {
      * parsing the given JSON response.
      */
     private static List<NewsArticle> extractFeatureFromJson(String articleJSON) {
+        String webPublicationDate;
+        String webTitle;
+        String webUrl;
+        String webTrailText;
+        String byLine;
+        String thumbnail;
+
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(articleJSON)) {
             Log.v(LOG_TAG, "The JSON string is empty or null. Returning early.");
@@ -167,7 +175,6 @@ public final class NewsQueryUtils {
         // is formatted, a JSONException exception object will be thrown.
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
         try {
-
             // Create a JSONObject from the JSON response string
             JSONObject jsonObjectRoot = new JSONObject(articleJSON);
 
@@ -180,18 +187,19 @@ public final class NewsQueryUtils {
 
             // For each article in the articleArray, create an {@link NewsArticle} object
             for (int i = 0; i < jsonArrayResults.length(); i++) {
+
                 // Get a single newsArticle at position i within the list of newsArticles
                 JSONObject currentArticle = jsonArrayResults.getJSONObject(i);
 
-                String webPublicationDate = currentArticle.getString("webPublicationDate");
-                String webTitle = currentArticle.getString("webTitle");
-                String webUrl = currentArticle.getString("webUrl");
-
+                // Target the fields object that contains all the elements we need
                 JSONObject jsonObjectFields = currentArticle.getJSONObject("fields");
 
-                String webTrailText = jsonObjectFields.optString("trailText");
-                String byLine = jsonObjectFields.optString("byline");
-                String thumbnail = jsonObjectFields.optString("thumbnail");
+                webPublicationDate = jsonObjectFields.getString("firstPublicationDate");
+                webTitle = jsonObjectFields.getString("headline");
+                webUrl = jsonObjectFields.getString("shortUrl");
+                webTrailText = jsonObjectFields.optString("trailText");
+                byLine = jsonObjectFields.optString("byline");
+                thumbnail = jsonObjectFields.optString("thumbnail");
 
                 // Add a new NewsArticle from the data
                 newsArticles.add(new NewsArticle(webPublicationDate, webTitle, webTrailText, webUrl, byLine, downloadBitmap(thumbnail)));

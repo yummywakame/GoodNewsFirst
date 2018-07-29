@@ -17,6 +17,7 @@ package com.yummywakame.breakroom;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,7 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
      * @param context      of the app
      * @param newsArticles is the list of newsArticles, which is the data source of the adapter
      */
-    public NewsArticleAdapter(Context context, List<NewsArticle> newsArticles) {
+    public NewsArticleAdapter(@NonNull Context context, @NonNull List<NewsArticle> newsArticles) {
         super(context, 0, newsArticles);
     }
 
