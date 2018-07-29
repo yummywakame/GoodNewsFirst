@@ -24,8 +24,8 @@
         android:layout_margin="@dimen/portrait_splash_padding"
         android:adjustViewBounds="true"
         android:alpha=".7"
-        android:src="@drawable/guardian_logo_white"
-        android:contentDescription="@string/image_desc_guardian_logo"/>
+        android:contentDescription="@string/image_desc_guardian_logo"
+        android:src="@drawable/guardian_logo_white"/>
 
     <!-- Splash logo text: "Powered by" -->
     <TextView
@@ -73,20 +73,20 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginBottom="@dimen/margin_s"
                 android:layout_marginTop="@dimen/margin_s"
+                android:contentDescription="@string/image_desc_app_logo"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_thumb_up"
-                android:contentDescription="@string/image_desc_app_logo"/>
+                android:src="@drawable/ic_thumb_up"/>
 
             <TextView
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:includeFontPadding="false"
-                android:text="@string/app_name"
-                android:textAppearance="@style/AppTitleText"
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/text_size_m"
                 android:layout_marginStart="@dimen/text_size_m"
-                android:layout_gravity="center_vertical"/>
+                android:includeFontPadding="false"
+                android:text="@string/app_name"
+                android:textAppearance="@style/AppTitleText"/>
 
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
