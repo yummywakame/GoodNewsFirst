@@ -68,9 +68,7 @@ public class NewsArticle {
         return webTrailText;
     }
 
-    public String getUrl() {
-        return webUrl;
-    }
+    public String getUrl() { return webUrl; }
 
     public String getAuthor() {
         return byLine;

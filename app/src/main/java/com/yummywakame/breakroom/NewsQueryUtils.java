@@ -20,7 +20,6 @@ import android.util.Log;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -192,14 +191,13 @@ public final class NewsQueryUtils {
                 // Get a single newsArticle at position i within the list of newsArticles
                 JSONObject currentArticle = jsonArrayResults.getJSONObject(i);
 
-                webUrl = currentArticle.getString("webUrl");
-
                 // Target the fields object that contains all the elements we need
                 JSONObject jsonObjectFields = currentArticle.getJSONObject("fields");
 
                 webPublicationDate = jsonObjectFields.getString("firstPublicationDate");
                 webTitle = jsonObjectFields.getString("headline");
                 webTrailText = jsonObjectFields.optString("trailText");
+                webUrl = jsonObjectFields.getString("shortUrl");
                 byLine = jsonObjectFields.optString("byline");
                 thumbnail = jsonObjectFields.optString("thumbnail");
 

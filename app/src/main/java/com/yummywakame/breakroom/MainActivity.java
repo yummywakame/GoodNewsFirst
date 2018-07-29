@@ -39,7 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements LoaderCallbacks<List<NewsArticle>> {
+        implements LoaderCallbacks<List<NewsArticle>>  {
 
     /** Set up swipe to refresh functionality */
     SwipeRefreshLayout swipeLayout;
