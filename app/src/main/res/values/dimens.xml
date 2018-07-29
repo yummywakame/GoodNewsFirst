@@ -8,8 +8,17 @@
     <dimen name="margin_m">16dp</dimen>
     <dimen name="margin_l">24dp</dimen>
     <dimen name="margin_xxxl">48dp</dimen>
+    <dimen name="portrait_splash_padding">50dp</dimen>
 
     <!-- Default text sizes -->
-    <dimen name="text_size_s">16sp</dimen>
-    <dimen name="text_size_m">24sp</dimen>
+    <dimen name="text_size_apptitle">20sp</dimen>
+    <dimen name="text_size_xs">12sp</dimen>
+    <dimen name="text_size_s">14sp</dimen>
+    <dimen name="text_size_m">16sp</dimen>
+    <dimen name="text_size_l">24sp</dimen>
+
+    <!-- Cardview dimensions -->
+    <dimen name="cardCornerRadius">5dp</dimen>
+    <dimen name="cardElevation">4dp</dimen>
+
 </resources>

@@ -14,9 +14,22 @@
      limitations under the License.
 -->
 <resources>
-    <!-- App Title -->
+    <!-- Permanent App Text -->
     <string name="app_name">Good News First</string>
     <string name="no_articles">No news articles found.</string>
     <string name="no_internet_connection">No internet connection.</string>
     <string name="powered_by">Powered by</string>
+
+    <!-- Placeholder text -->
+    <string name="article_trail_text">Trail text...</string>
+    <string name="article_author">Author</string>
+    <string name="article_date">Jul, 4 \'18</string>
+    <string name="article_time">08:00</string>
+    <string name="article_headline">News Headline</string>
+
+
+    <!-- Image descriptions -->
+    <string name="image_desc_article_image">Article image - no description available from API.</string>
+    <string name="image_desc_app_logo">App Logo - showing a thumbs up.</string>
+    <string name="image_desc_guardian_logo">Guardian Logo</string>
 </resources>

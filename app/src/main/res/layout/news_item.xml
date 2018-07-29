@@ -26,8 +26,8 @@
         android:layout_marginTop="@dimen/margin_s"
         android:foreground="?android:attr/selectableItemBackground"
         android:stateListAnimator="@animator/lift_on_touch"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="4dp"
+        app:cardCornerRadius="@dimen/cardCornerRadius"
+        app:cardElevation="@dimen/cardElevation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -43,6 +43,7 @@
                 android:id="@+id/article_image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:contentDescription="@string/image_desc_article_image"
                 android:scaleType="centerCrop"
                 app:layout_constraintDimensionRatio="h,16:9"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -62,12 +63,12 @@
                 android:paddingEnd="@dimen/margin_s"
                 android:paddingStart="@dimen/margin_s"
                 android:paddingTop="@dimen/margin_s"
+                android:text="@string/article_headline"
                 android:textAppearance="@style/ArticleTitleText"
                 app:layout_constraintBottom_toBottomOf="@+id/article_image"
                 app:layout_constraintEnd_toEndOf="@+id/article_image"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/article_image"
-                tools:text="News Headline" />
+                app:layout_constraintStart_toStartOf="@+id/article_image" />
 
             <TextView
                 android:id="@+id/article_trailtext"
@@ -78,7 +79,7 @@
                 android:paddingEnd="@dimen/margin_s"
                 android:paddingStart="@dimen/margin_s"
                 android:paddingTop="@dimen/margin_s"
-                android:text="Trail text..."
+                android:text="@string/article_trail_text"
                 android:textAppearance="@style/ArticleTrailText"
                 app:layout_constraintEnd_toEndOf="@+id/article_image"
                 app:layout_constraintStart_toStartOf="@+id/article_image"
@@ -94,33 +95,29 @@
                 android:paddingBottom="@dimen/margin_s"
                 android:paddingEnd="@dimen/margin_s"
                 android:paddingStart="@dimen/margin_s"
+                android:text="@string/article_author"
                 android:textAppearance="@style/ArticleAuthorText"
                 app:layout_constraintEnd_toEndOf="@+id/article_title"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/article_trailtext"
-                tools:text="Author" />
+                app:layout_constraintTop_toBottomOf="@+id/article_trailtext" />
 
             <TextView
                 android:id="@+id/article_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginEnd="24dp"
-                android:layout_marginRight="24dp"
+                android:layout_marginEnd="@dimen/margin_l"
+                android:layout_marginRight="@dimen/margin_l"
                 android:background="@drawable/date_background_tint_alpha"
-                android:fontFamily="@font/ubuntu"
                 android:gravity="center_horizontal"
                 android:paddingEnd="@dimen/margin_s"
                 android:paddingStart="@dimen/margin_s"
                 android:paddingTop="@dimen/margin_s"
-                android:textAllCaps="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Inverse"
-                android:textSize="12sp"
-                android:textStyle="bold"
+                android:text="@string/article_date"
+                android:textAppearance="@style/ArticleDateTimeText"
                 app:layout_constraintEnd_toEndOf="@+id/article_image"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Jul, 4 '18" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/article_time"
@@ -128,18 +125,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:background="@drawable/date_background_tint_alpha"
-                android:fontFamily="@font/ubuntu"
                 android:gravity="center_horizontal"
                 android:paddingBottom="@dimen/margin_s"
                 android:paddingEnd="@dimen/margin_s"
                 android:paddingStart="@dimen/margin_s"
-                android:textAppearance="@style/TextAppearance.AppCompat.Inverse"
-                android:textSize="12sp"
-                android:textStyle="bold"
+                android:text="@string/article_time"
+                android:textAppearance="@style/ArticleDateTimeText"
                 app:layout_constraintEnd_toEndOf="@+id/article_date"
                 app:layout_constraintStart_toStartOf="@+id/article_date"
-                app:layout_constraintTop_toBottomOf="@+id/article_date"
-                tools:text="08:00" />
+                app:layout_constraintTop_toBottomOf="@+id/article_date" />
 
             <ImageView
                 android:id="@+id/bookmark_tail"
@@ -148,6 +142,7 @@
                 android:adjustViewBounds="false"
                 android:alpha=".65"
                 android:scaleType="center"
+                android:contentDescription="@null"
                 app:layout_constraintEnd_toEndOf="@+id/article_date"
                 app:layout_constraintStart_toStartOf="@+id/article_date"
                 app:layout_constraintTop_toBottomOf="@+id/article_time"

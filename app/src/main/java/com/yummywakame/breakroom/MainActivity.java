@@ -27,7 +27,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -71,6 +70,9 @@ public class MainActivity extends AppCompatActivity
     /** ProgressBar Spinner that is displayed while data is being downloaded */
     private ProgressBar mSpinnerView;
 
+    /** Manages manual loading and reloading of data */
+    private LoaderManager loaderManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,8 +81,8 @@ public class MainActivity extends AppCompatActivity
         // Find a reference to the {@link ListView} in the layout
         articleListView = findViewById(R.id.list);
 
-        // Find the empty_view that is only visible when the list has no items
-        mEmptyStateTextView = findViewById(R.id.empty_view);
+        // Find the feedback_view that is only visible when the list has no items
+        mEmptyStateTextView = findViewById(R.id.feedback_view);
         articleListView.setEmptyView(mEmptyStateTextView);
 
         // Create a new adapter that takes an empty list of articles as input
@@ -119,7 +121,7 @@ public class MainActivity extends AppCompatActivity
         // If there is a network connection, fetch data
         if (networkInfo != null && networkInfo.isConnected()) {
             // Get a reference to the LoaderManager, in order to interact with loaders.
-            LoaderManager loaderManager = getLoaderManager();
+            loaderManager = getLoaderManager();
 
             // Initialize the loader. Pass in the nt ID constant defined above and pass in null for
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
@@ -142,23 +144,25 @@ public class MainActivity extends AppCompatActivity
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // Your code here
-                Toast.makeText(getApplicationContext(), "Works!", Toast.LENGTH_LONG).show();
+                // Unload old list and load new list of articles
+                loaderManager.destroyLoader(ARTICLE_LOADER_ID);
+                loaderManager.getLoader(ARTICLE_LOADER_ID);
+                loaderManager.initLoader(ARTICLE_LOADER_ID, null, MainActivity.this);
+
+                Toast.makeText(getApplicationContext(), "Working yet?", Toast.LENGTH_LONG).show();
                 // To keep animation for 4 seconds
                 new Handler().postDelayed(new Runnable() {
                     @Override public void run() {
                         // Stop animation (This will be after 3 seconds)
                         swipeLayout.setRefreshing(false);
                     }
-                }, 4000); // Delay in millis
+                }, 2000); // Delay in millis
             }
         });
 
         // Scheme colors for animation
         swipeLayout.setColorSchemeColors(
                 getResources().getColor(R.color.secondaryHilight),
-                getResources().getColor(android.R.color.holo_green_light),
-                getResources().getColor(android.R.color.holo_orange_light),
                 getResources().getColor(R.color.primaryHilight)
         );
 

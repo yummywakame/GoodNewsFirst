@@ -23,25 +23,53 @@
         <item name="colorAccent">@color/secondaryHilight</item>
     </style>
 
-    <!-- Article Title Text -->
+    <!-- Top Toolbar TitleView Text -->
+    <style name="AppTitleText" parent="@style/TextAppearance.AppCompat.Title">
+        <item name="android:fontFamily">@font/ubuntu_medium</item>
+        <item name="android:textSize">@dimen/text_size_apptitle</item>
+        <item name="android:textColor">@color/secondaryHilight</item>
+    </style>
+
+    <!-- Splash empty TextView text -->
+    <style name="SplashEmptyText" parent="@style/TextAppearance.AppCompat.Medium.Inverse">
+        <item name="android:fontFamily">@font/ubuntu_italic</item>
+        <item name="android:textColor">@color/secondaryHilight</item>
+    </style>
+
+    <!-- Splash powered by TextView text -->
+    <style name="SplashPoweredByText" parent="@style/TextAppearance.AppCompat.Body2">
+        <item name="android:fontFamily">@font/ubuntu</item>
+        <item name="android:textSize">@dimen/text_size_s</item>
+        <item name="android:textColor">@color/primaryLight</item>
+    </style>
+
+    <!-- Article Date / Time TextViews -->
+    <style name="ArticleDateTimeText" parent="@style/TextAppearance.AppCompat.Inverse">
+        <item name="android:fontFamily">@font/ubuntu_medium</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">@dimen/text_size_xs</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+    </style>
+
+    <!-- Article Title TextView -->
     <style name="ArticleTitleText" parent="@style/TextAppearance.AppCompat.Body1">
         <item name="android:fontFamily">@font/libre_baskerville</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/text_size_s</item>
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 
     <!-- Article TrailText Text -->
     <style name="ArticleTrailText" parent="@style/TextAppearance.AppCompat.Body2">
         <item name="android:fontFamily">@font/ubuntu</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/text_size_s</item>
         <item name="android:textColor">@color/primaryLight</item>
     </style>
 
     <!-- Article Author Text -->
     <style name="ArticleAuthorText" parent="@style/TextAppearance.AppCompat.Body2">
         <item name="android:fontFamily">@font/ubuntu_italic</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/text_size_s</item>
         <item name="android:textColor">@color/secondaryHilight</item>
     </style>
 

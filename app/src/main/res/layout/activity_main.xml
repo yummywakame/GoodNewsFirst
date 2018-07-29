@@ -21,10 +21,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_margin="50dp"
+        android:layout_margin="@dimen/portrait_splash_padding"
         android:adjustViewBounds="true"
         android:alpha=".7"
-        android:src="@drawable/guardian_logo_white" />
+        android:src="@drawable/guardian_logo_white"
+        android:contentDescription="@string/image_desc_guardian_logo"/>
 
     <!-- Splash logo text: "Powered by" -->
     <TextView
@@ -34,17 +35,16 @@
         android:layout_above="@id/splash_logo"
         android:layout_centerHorizontal="true"
         android:text="@string/powered_by"
-        android:textAppearance="@style/ArticleTrailText" />
+        android:textAppearance="@style/SplashPoweredByText" />
 
-    <!-- Empty view is only visible when the list has no items. -->
+    <!-- Empty view is only visible when there is a notice to display. -->
     <TextView
-        android:id="@+id/empty_view"
+        android:id="@+id/feedback_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/splash_logo"
         android:layout_centerHorizontal="true"
-        android:fontFamily="@font/ubuntu"
-        android:textAppearance="?android:textAppearanceMediumInverse" />
+        android:textAppearance="@style/SplashEmptyText" />
 
     <!-- The spinning progress bar is only visible while waiting for list items. -->
     <ProgressBar
@@ -68,23 +68,24 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/margin_s"
+                android:layout_marginTop="@dimen/margin_s"
+                android:scaleType="fitCenter"
                 android:src="@drawable/ic_thumb_up"
-                android:layout_gravity="center_vertical"/>
+                android:contentDescription="@string/image_desc_app_logo"/>
 
             <TextView
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/ubuntu"
                 android:includeFontPadding="false"
                 android:text="@string/app_name"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:textColor="@color/secondaryHilight"
-                android:textSize="16sp"
-                android:layout_marginLeft="@dimen/text_size_s"
-                android:layout_marginStart="@dimen/text_size_s"
+                android:textAppearance="@style/AppTitleText"
+                android:layout_marginLeft="@dimen/text_size_m"
+                android:layout_marginStart="@dimen/text_size_m"
                 android:layout_gravity="center_vertical"/>
 
         </LinearLayout>
