@@ -20,6 +20,7 @@ import android.util.Log;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -232,5 +233,4 @@ public final class NewsQueryUtils {
         }
         return bitmap;
     }
-
 }

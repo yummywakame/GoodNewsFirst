@@ -18,4 +18,5 @@
     <string name="app_name">Good News First</string>
     <string name="no_articles">No news articles found.</string>
     <string name="no_internet_connection">No internet connection.</string>
+    <string name="powered_by">Powered by</string>
 </resources>

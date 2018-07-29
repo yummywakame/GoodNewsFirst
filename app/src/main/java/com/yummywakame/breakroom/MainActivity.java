@@ -44,11 +44,14 @@ public class MainActivity extends AppCompatActivity
     /** Set up swipe to refresh functionality */
     SwipeRefreshLayout swipeLayout;
 
+    /** API Key Value */
+    private static final String apiKey = BuildConfig.ApiKey;
+
     /** URL for article data from the Guardian dataset */
     private static final String GUARDIAN_REQUEST_URL =
             "https://content.guardianapis.com/search?tag=world%2Fseries%2Fthe-upside-weekly-report"
                     +"&order-by=newest&show-fields=all&show-tags=contributor"
-                    +"&api-key=ecc9f376-0d77-4fd4-82ce-81673caa525b";
+                    + "&api-key=" + apiKey;
     /**
      * Constant value for the article loader ID. We can choose any integer.
      * This really only comes into play if you're using multiple loaders.
