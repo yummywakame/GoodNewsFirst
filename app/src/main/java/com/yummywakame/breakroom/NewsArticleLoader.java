@@ -17,7 +17,6 @@ package com.yummywakame.breakroom;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.util.Log;
 
 import java.util.List;
 
@@ -26,8 +25,6 @@ import java.util.List;
  * network request to the given URL.
  */
 public class NewsArticleLoader extends AsyncTaskLoader<List<NewsArticle>> {
-
-    /** Tag for log messages */
 
     /** Query URL */
     private String mUrl;

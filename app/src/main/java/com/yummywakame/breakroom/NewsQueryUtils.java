@@ -41,7 +41,9 @@ import java.util.List;
  */
 public final class NewsQueryUtils {
 
-    /** Tag for the log messages */
+    /**
+     * Tag for the log messages
+     */
     private static final String LOG_TAG = NewsQueryUtils.class.getSimpleName() + " - LOG";
 
     /**
@@ -202,7 +204,13 @@ public final class NewsQueryUtils {
                 thumbnail = jsonObjectFields.optString("thumbnail");
 
                 // Add a new NewsArticle from the data
-                newsArticles.add(new NewsArticle(webPublicationDate, webTitle, webTrailText, webUrl, byLine, downloadBitmap(thumbnail)));
+                newsArticles.add(new
+                        NewsArticle(webPublicationDate,
+                        webTitle,
+                        webTrailText,
+                        webUrl,
+                        byLine,
+                        downloadBitmap(thumbnail)));
             }
 
         } catch (JSONException e) {

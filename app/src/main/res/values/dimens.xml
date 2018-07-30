@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="list_margin">16dp</dimen>
-
     <!-- Default screen margins, per the Material Design guidelines. -->
     <dimen name="margin_xs">4dp</dimen>
     <dimen name="margin_s">8dp</dimen>
@@ -20,5 +18,4 @@
     <!-- Cardview dimensions -->
     <dimen name="cardCornerRadius">5dp</dimen>
     <dimen name="cardElevation">4dp</dimen>
-
 </resources>

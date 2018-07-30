@@ -75,7 +75,7 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         titleView.setText(newsTitle);
 
         // Get the trailtext from the NewsArticle object
-        String newsTrail = currentNewsArticle.getTrailText()+".";
+        String newsTrail = currentNewsArticle.getTrailText() + ".";
         // Find the TextView with view ID trail article_trailtext
         TextView trailView = listItemView.findViewById(R.id.article_trailtext);
         // Display the location of the current article in that TextView
@@ -85,7 +85,7 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         // Format the article_date string (i.e. "Mar 3, '18")
         String formattedDate = formatDate(currentNewsArticle.getPublishedDate());
         // Find the TextView with view ID article_date
-        TextView dateView = (TextView) listItemView.findViewById(R.id.article_date);
+        TextView dateView = listItemView.findViewById(R.id.article_date);
         // Display the article_date of the current article in that TextView
         dateView.setText(formattedDate);
 
@@ -115,7 +115,7 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
     }
 
     /**
-     * Return the formatted time string (i.e. "Mar 3, '18") from a Date object.
+     * Return a formatted time string (i.e. "Mar 3, '18") from a Date object.
      */
     private String formatDate(String date) {
         final SimpleDateFormat inputParser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault());
@@ -131,7 +131,7 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
     }
 
     /**
-     * Return the formatted date string (i.e. "4:30 PM") from a Date object.
+     * Return a formatted date string (i.e. "4:30 PM") from a Date object.
      */
     private String formatTime(String date) {
         final SimpleDateFormat inputParser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault());

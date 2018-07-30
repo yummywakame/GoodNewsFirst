@@ -16,6 +16,7 @@
 package com.yummywakame.breakroom;
 
 import android.graphics.Bitmap;
+
 /**
  * An {@link NewsArticle} object contains information related to a single article.
  */
@@ -58,7 +59,9 @@ public class NewsArticle {
         this.thumbnail = thumbnail;
     }
 
-    public String getPublishedDate() { return webPublicationDate; }
+    public String getPublishedDate() {
+        return webPublicationDate;
+    }
 
     public String getTitle() {
         return webTitle;
@@ -68,7 +71,9 @@ public class NewsArticle {
         return webTrailText;
     }
 
-    public String getUrl() { return webUrl; }
+    public String getUrl() {
+        return webUrl;
+    }
 
     public String getAuthor() {
         return byLine;

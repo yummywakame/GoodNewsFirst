@@ -1,18 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2016 The Android Open Source Project
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
--->
 <resources>
     <!-- Permanent App Text -->
     <string name="app_name">Good News First</string>
@@ -21,7 +7,7 @@
     <string name="powered_by">Powered by</string>
 
     <!-- Placeholder text -->
-    <string name="article_trail_text">Trail text...</string>
+    <string name="article_trail_text">Trail text.</string>
     <string name="article_author">Author</string>
     <string name="article_date">Jul, 4 \'18</string>
     <string name="article_time">08:00</string>

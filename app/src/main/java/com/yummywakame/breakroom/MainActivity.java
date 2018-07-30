@@ -24,53 +24,62 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements LoaderCallbacks<List<NewsArticle>>  {
+        implements LoaderCallbacks<List<NewsArticle>> {
 
-    /** Set up swipe to refresh functionality */
-    SwipeRefreshLayout swipeLayout;
-
-    /** API Key Value which you need to store in your gradle.properties file as:
-     *  GoodNewsFirst_GuardianApp_ApiKey="your-api-key-would-go-here" */
+    /**
+     * API Key Value which you need to store in your gradle.properties file as:
+     * GoodNewsFirst_GuardianApp_ApiKey="your-api-key-would-go-here"
+     */
     private static final String apiKey = BuildConfig.ApiKey;
 
-    /** URL for article data from the Guardian dataset */
+    /**
+     * URL for article data from the Guardian dataset
+     */
     private static final String GUARDIAN_REQUEST_URL =
             "https://content.guardianapis.com/search?tag=world%2Fseries%2Fthe-upside-weekly-report"
-                    + "&order-by=newest&show-fields=all&show-tags=contributor"
+                    + "&order-by=newest&show-fields=all"
                     + "&api-key=" + apiKey;
+
     /**
      * Constant value for the article loader ID. We can choose any integer.
      * This really only comes into play if you're using multiple loaders.
      */
     private static final int ARTICLE_LOADER_ID = 1;
 
-    /** ListView that holds the articles **/
+    /**
+     * ListView that holds the articles
+     **/
     private ListView articleListView;
 
-    /** Adapter for the list of articles */
+    /**
+     * Adapter for the list of articles
+     */
     private NewsArticleAdapter mAdapter;
 
-    /** TextView that is displayed when the list is empty */
+    /**
+     * TextView that is displayed when the list is empty
+     */
     private TextView mEmptyStateTextView;
 
-    /** ProgressBar Spinner that is displayed while data is being downloaded */
+    /**
+     * ProgressBar Spinner that is displayed while data is being downloaded
+     */
     private ProgressBar mSpinnerView;
 
-    /** Manages manual loading and reloading of data */
+    /**
+     * Manages manual loading and reloading of data
+     */
     private LoaderManager loaderManager;
 
     @Override
@@ -84,6 +93,7 @@ public class MainActivity extends AppCompatActivity
         // Find the feedback_view that is only visible when the list has no items
         mEmptyStateTextView = findViewById(R.id.feedback_view);
         articleListView.setEmptyView(mEmptyStateTextView);
+        mEmptyStateTextView.setText("");
 
         // Create a new adapter that takes an empty list of articles as input
         mAdapter = new NewsArticleAdapter(this, new ArrayList<NewsArticle>());
@@ -123,7 +133,7 @@ public class MainActivity extends AppCompatActivity
             // Get a reference to the LoaderManager, in order to interact with loaders.
             loaderManager = getLoaderManager();
 
-            // Initialize the loader. Pass in the nt ID constant defined above and pass in null for
+            // Initialize the loader. Pass in the int ID constant defined above and pass in null for
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
             loaderManager.initLoader(ARTICLE_LOADER_ID, null, this);
@@ -137,35 +147,6 @@ public class MainActivity extends AppCompatActivity
             // Update empty state with no connection error message
             mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
-
-        // Getting SwipeContainerLayout
-        swipeLayout = findViewById(R.id.swipe_container);
-        // Adding Listener
-        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                // Unload old list and load new list of articles
-                loaderManager.destroyLoader(ARTICLE_LOADER_ID);
-                loaderManager.getLoader(ARTICLE_LOADER_ID);
-                loaderManager.initLoader(ARTICLE_LOADER_ID, null, MainActivity.this);
-
-                Toast.makeText(getApplicationContext(), "Working yet?", Toast.LENGTH_LONG).show();
-                // To keep animation for 4 seconds
-                new Handler().postDelayed(new Runnable() {
-                    @Override public void run() {
-                        // Stop animation (This will be after 3 seconds)
-                        swipeLayout.setRefreshing(false);
-                    }
-                }, 2000); // Delay in millis
-            }
-        });
-
-        // Scheme colors for animation
-        swipeLayout.setColorSchemeColors(
-                getResources().getColor(R.color.secondaryHilight),
-                getResources().getColor(R.color.primaryHilight)
-        );
-
     }
 
     @Override
@@ -198,4 +179,5 @@ public class MainActivity extends AppCompatActivity
         // Loader reset, so we can clear out our existing data.
         mAdapter.clear();
     }
+
 }
