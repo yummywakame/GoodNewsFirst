@@ -225,18 +225,27 @@ public final class NewsQueryUtils {
     }
 
     /**
-     * Load an image from a URL and return a {@link Bitmap}
+     * Load the low res thumbnail image from the URL. If available in 1000px format,
+     * use that instead. Return a {@link Bitmap}
+     * Credit to Mohammad Ali Fouani via https://stackoverflow.com/q/51587354/9302422
      *
      * @param url string of the URL link to the image
      * @return Bitmap of the image
      */
     private static Bitmap downloadBitmap(String url) {
+        // get the thumbnail image and if available at 1000px, use that instead
         Bitmap bitmap = null;
+        String originalUrl = url;
+        String newUrl = url.replace(url.substring(url.lastIndexOf("/")),"/1000.jpg");
         try {
-            InputStream inputStream = new URL(url).openStream();
+            InputStream inputStream = new URL(newUrl).openStream();
             bitmap = BitmapFactory.decodeStream(inputStream);
         } catch (Exception e) {
-            Log.e(LOG_TAG, e.getMessage());
+            try {
+                InputStream inputStream = new URL(originalUrl).openStream();
+                bitmap = BitmapFactory.decodeStream(inputStream);
+            } catch (Exception ignored) {
+            }
         }
         return bitmap;
     }
