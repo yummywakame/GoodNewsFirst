@@ -13,7 +13,7 @@
     <!-- Accent color of the app -->
     <color name="secondaryHilight">#1da1f2</color>
     <!-- Primary Text Color -->
-    <color name="primaryTextColor">#ffffff</color>
+    <color name="primaryTextColor">@android:color/white</color>
     <!-- Primary Light Text Color -->
     <color name="primaryLight">#8899a6</color>
 </resources>
