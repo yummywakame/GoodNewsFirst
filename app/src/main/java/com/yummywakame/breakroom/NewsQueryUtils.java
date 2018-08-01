@@ -41,6 +41,11 @@ import java.util.List;
  */
 public final class NewsQueryUtils {
 
+    /* urlConnection.setReadTimeout in milliseconds */
+    public static final int MAX_READ_TIMEOUT = 10000;
+    /* urlConnection.setConnectTimeout in milliseconds */
+    public static final int MAX_CONNECTION_TIMEOUT = 15000;/* milliseconds */
+
     /**
      * Tag for the log messages
      */
@@ -104,8 +109,8 @@ public final class NewsQueryUtils {
         InputStream inputStream = null;
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setReadTimeout(10000 /* milliseconds */);
-            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setReadTimeout(MAX_READ_TIMEOUT /* milliseconds */);
+            urlConnection.setConnectTimeout(MAX_CONNECTION_TIMEOUT /* milliseconds */);
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
