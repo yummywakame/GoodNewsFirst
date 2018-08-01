@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity
 //            "https://content.guardianapis.com/search?tag=world%2Fseries%2Fthe-upside-weekly-report"
 //                    + "&order-by=newest&show-fields=all"
 //                    + "&api-key=" + apiKey;
-                    "https://content.guardianapis.com/search?tag=world%2Fseries%2Fthe-upside-weekly-report&order-by=newest&show-fields=all&api-key=ecc9f376-0d77-4fd4-82ce-81673caa525b";
+            "https://content.guardianapis.com/search?tag=world%2Fseries%2Fthe-upside-weekly-report&order-by=newest&show-fields=all&api-key=ecc9f376-0d77-4fd4-82ce-81673caa525b";
 
 
     /**

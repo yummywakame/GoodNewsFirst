@@ -157,6 +157,7 @@ public final class NewsQueryUtils {
      * parsing the given JSON response.
      */
     private static List<NewsArticle> extractFeatureFromJson(String articleJSON) {
+        String webSectionName;
         String webPublicationDate;
         String webTitle;
         String webUrl;
@@ -196,6 +197,7 @@ public final class NewsQueryUtils {
                 // Target the fields object that contains all the elements we need
                 JSONObject jsonObjectFields = currentArticle.getJSONObject("fields");
 
+                webSectionName = currentArticle.getString("sectionName");
                 webPublicationDate = jsonObjectFields.getString("firstPublicationDate");
                 webTitle = jsonObjectFields.getString("headline");
                 webTrailText = jsonObjectFields.optString("trailText");
@@ -204,13 +206,15 @@ public final class NewsQueryUtils {
                 thumbnail = jsonObjectFields.optString("thumbnail");
 
                 // Add a new NewsArticle from the data
-                newsArticles.add(new
-                        NewsArticle(webPublicationDate,
+                newsArticles.add(new NewsArticle(
+                        webSectionName,
+                        webPublicationDate,
                         webTitle,
                         webTrailText,
                         webUrl,
                         byLine,
-                        downloadBitmap(thumbnail)));
+                        downloadBitmap(thumbnail)
+                ));
             }
 
         } catch (JSONException e) {

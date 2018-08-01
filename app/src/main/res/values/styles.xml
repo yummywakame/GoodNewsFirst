@@ -28,6 +28,14 @@
         <item name="android:textColor">@color/primaryLight</item>
     </style>
 
+    <!-- Article Section Title TextViews -->
+    <style name="ArticleSectionText" parent="@style/TextAppearance.AppCompat.Inverse">
+        <item name="android:fontFamily">@font/ubuntu_medium</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">@dimen/text_size_xs</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+    </style>
+
     <!-- Article Date / Time TextViews -->
     <style name="ArticleDateTimeText" parent="@style/TextAppearance.AppCompat.Inverse">
         <item name="android:fontFamily">@font/ubuntu_medium</item>

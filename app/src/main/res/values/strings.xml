@@ -9,6 +9,7 @@
     <!-- Placeholder text -->
     <string name="article_trail_text">Trail text.</string>
     <string name="article_author">Author</string>
+    <string name="article_section">World News</string>
     <string name="article_date">Jul, 4 \'18</string>
     <string name="article_time">08:00</string>
     <string name="article_headline">News Headline</string>

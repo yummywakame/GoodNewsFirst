@@ -22,6 +22,9 @@ import android.graphics.Bitmap;
  */
 public class NewsArticle {
 
+    // Section the article comes from
+    private String webSectionName;
+
     // Publication date for the article
     private String webPublicationDate;
 
@@ -43,6 +46,7 @@ public class NewsArticle {
     /**
      * Constructs a new {@link NewsArticle} object
      *
+     * @param webSectionName     Section for the article
      * @param webPublicationDate Publication date for the article
      * @param webTitle           Title of the article
      * @param webTrailText       TrailText of the article
@@ -50,13 +54,17 @@ public class NewsArticle {
      * @param byLine             Author of the article
      * @param thumbnail          Url to the thumbnail of the article
      */
-    public NewsArticle(String webPublicationDate, String webTitle, String webTrailText, String webUrl, String byLine, Bitmap thumbnail) {
+    public NewsArticle(String webSectionName, String webPublicationDate, String webTitle, String webTrailText, String webUrl, String byLine, Bitmap thumbnail) {
+        this.webSectionName = webSectionName;
         this.webPublicationDate = webPublicationDate;
         this.webTitle = webTitle;
         this.webTrailText = webTrailText;
         this.webUrl = webUrl;
         this.byLine = byLine;
         this.thumbnail = thumbnail;
+    }
+    public String getSectionName() {
+        return webSectionName;
     }
 
     public String getPublishedDate() {

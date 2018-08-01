@@ -67,6 +67,13 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         // Find the article at the given position in the list of articles
         NewsArticle currentNewsArticle = getItem(position);
 
+        // Get the Section name from the NewsArticle object
+        String newsSection = currentNewsArticle.getSectionName();
+        // Find the TextView with view ID article_title
+        TextView sectionNameView = listItemView.findViewById(R.id.article_section);
+        // Display the location of the current article in that TextView
+        sectionNameView.setText(newsSection);
+
         // Get the title from the NewsArticle object
         String newsTitle = currentNewsArticle.getTitle();
         // Find the TextView with view ID article_title
@@ -96,8 +103,8 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         // Display the time of the current article in that TextView
         timeView.setText(formattedTime);
 
-        // GEt the author from the NewsArticle object
-        String newsAuthor = "By: " + currentNewsArticle.getAuthor() + " ";
+        // Get the author from the NewsArticle object
+        String newsAuthor = "By " + currentNewsArticle.getAuthor() + " ";
         // Find the TextView with view ID article_author
         TextView authorView = listItemView.findViewById(R.id.article_author);
         // Display the location of the current article in that TextView

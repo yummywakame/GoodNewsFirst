@@ -86,20 +86,37 @@
                 app:layout_constraintTop_toBottomOf="@+id/article_title" />
 
             <TextView
+                android:id="@+id/article_section"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_gravity="end"
+                android:background="@color/backgroundColorOverlay"
+                android:gravity="left|center_vertical"
+                android:maxLines="1"
+                android:paddingBottom="@dimen/margin_s"
+                android:paddingEnd="@dimen/margin_s"
+                android:paddingStart="@dimen/margin_s"
+                android:text="@string/article_section"
+                android:textAppearance="@style/ArticleSectionText"
+                app:layout_constraintBottom_toBottomOf="@+id/article_author"
+                app:layout_constraintEnd_toStartOf="@+id/article_author"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/article_trailtext" />
+
+            <TextView
                 android:id="@+id/article_author"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/backgroundColorOverlay"
-                android:gravity="end"
+                android:gravity="center_vertical|end"
                 android:maxLines="1"
                 android:paddingBottom="@dimen/margin_s"
                 android:paddingEnd="@dimen/margin_s"
                 android:paddingStart="@dimen/margin_s"
                 android:text="@string/article_author"
                 android:textAppearance="@style/ArticleAuthorText"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/article_title"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/article_trailtext" />
 
             <TextView
