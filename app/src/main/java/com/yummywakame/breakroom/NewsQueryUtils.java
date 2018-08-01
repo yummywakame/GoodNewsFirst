@@ -15,6 +15,9 @@
  */
 package com.yummywakame.breakroom;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -263,5 +266,22 @@ public final class NewsQueryUtils {
             }
         }
         return bitmap;
+    }
+
+    /** Checks to see if there is a network connection when needed */
+    public static boolean isConnected(Context context) {
+        boolean connected = false;
+        // Get a reference to the ConnectivityManager to check state of network connectivity
+        ConnectivityManager connMgr = (ConnectivityManager)
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        // Get details on the currently active default data network
+        assert connMgr != null;
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
+            connected = true;
+        }
+        return connected;
     }
 }
