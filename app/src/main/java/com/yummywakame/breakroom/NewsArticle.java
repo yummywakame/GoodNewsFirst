@@ -22,25 +22,12 @@ import android.graphics.Bitmap;
  */
 public class NewsArticle {
 
-    // Section the article comes from
     private String webSectionName;
-
-    // Publication date for the article
     private String webPublicationDate;
-
-    // Title of the article
     private String webTitle;
-
-    // Intro of the article
     private String webTrailText;
-
-    // Url of the article
     private String webUrl;
-
-    // Author of the article
     private String byLine;
-
-    // Bitmap of the thumbnail of the article
     private Bitmap thumbnail;
 
     /**
