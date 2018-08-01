@@ -42,9 +42,9 @@ import java.util.List;
 public final class NewsQueryUtils {
 
     /* urlConnection.setReadTimeout in milliseconds */
-    public static final int MAX_READ_TIMEOUT = 10000;
+    private static final int MAX_READ_TIMEOUT = 10000;
     /* urlConnection.setConnectTimeout in milliseconds */
-    public static final int MAX_CONNECTION_TIMEOUT = 15000;/* milliseconds */
+    private static final int MAX_CONNECTION_TIMEOUT = 15000;/* milliseconds */
 
     /**
      * Tag for the log messages
@@ -116,7 +116,7 @@ public final class NewsQueryUtils {
 
             // If the request was successful (response code 200),
             // then read the input stream and parse the response.
-            if (urlConnection.getResponseCode() == 200) {
+            if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
             } else {
@@ -202,6 +202,9 @@ public final class NewsQueryUtils {
                 // Target the fields object that contains all the elements we need
                 JSONObject jsonObjectFields = currentArticle.getJSONObject("fields");
 
+                // Note:    optString()will return null when fails.
+                //          getString() will throw exception when it fails.
+
                 webSectionName = currentArticle.getString("sectionName");
                 webPublicationDate = jsonObjectFields.getString("firstPublicationDate");
                 webTitle = jsonObjectFields.getString("headline");
@@ -238,19 +241,22 @@ public final class NewsQueryUtils {
      * use that instead. Return a {@link Bitmap}
      * Credit to Mohammad Ali Fouani via https://stackoverflow.com/q/51587354/9302422
      *
-     * @param url string of the URL link to the image
+     * @param originalUrl string of the original URL link to the thumbnail image
      * @return Bitmap of the image
      */
-    private static Bitmap downloadBitmap(String url) {
-        // get the thumbnail image and if available at 1000px, use that instead
+    private static Bitmap downloadBitmap(String originalUrl) {
         Bitmap bitmap = null;
-        String originalUrl = url;
-        String newUrl = url.replace(url.substring(url.lastIndexOf("/")),"/1000.jpg");
+        // replace the end of the originalUrl into a newUrl string
+        // (e.g. /500.jpg or similar) with /1000.jpg
+        String newUrl = originalUrl.replace
+                (originalUrl.substring(originalUrl.lastIndexOf("/")),"/1000.jpg");
         try {
+            // see if the higher-res image exists
             InputStream inputStream = new URL(newUrl).openStream();
             bitmap = BitmapFactory.decodeStream(inputStream);
         } catch (Exception e) {
             try {
+                // if no higher-res image is found, revert to original image url
                 InputStream inputStream = new URL(originalUrl).openStream();
                 bitmap = BitmapFactory.decodeStream(inputStream);
             } catch (Exception ignored) {

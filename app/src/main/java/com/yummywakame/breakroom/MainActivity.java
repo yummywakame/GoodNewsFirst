@@ -121,15 +121,8 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        // Get a reference to the ConnectivityManager to check state of network connectivity
-        ConnectivityManager connMgr = (ConnectivityManager)
-                getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        // Get details on the currently active default data network
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-
         // If there is a network connection, fetch data
-        if (networkInfo != null && networkInfo.isConnected()) {
+        if (isConnected()) {
             // Get a reference to the LoaderManager, in order to interact with loaders.
             loaderManager = getLoaderManager();
 
@@ -167,17 +160,43 @@ public class MainActivity extends AppCompatActivity
         // Clear the adapter of previous article data
         mAdapter.clear();
 
-        // If there is a valid list of {@link NewsArticle}s, then add them to the adapter's
+        // If there is a valid list of newsFeed, then add them to the adapter's
         // data set. This will trigger the ListView to update.
         if (newsArticles != null && !newsArticles.isEmpty()) {
             mAdapter.addAll(newsArticles);
+        } else {
+            if (isConnected()) {
+                // Set empty state text to display "No articles found."
+                mEmptyStateTextView.setText(R.string.no_articles);
+            } else {
+                // Update empty state with no connection error message
+                mEmptyStateTextView.setText(R.string.no_internet_connection);
+            }
         }
+
     }
 
     @Override
     public void onLoaderReset(Loader<List<NewsArticle>> loader) {
         // Loader reset, so we can clear out our existing data.
         mAdapter.clear();
+    }
+
+    /** Checks to see if there is a network connection when needed */
+    public boolean isConnected() {
+        // Get a reference to the ConnectivityManager to check state of network connectivity
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        // Get details on the currently active default data network
+        assert connMgr != null;
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
