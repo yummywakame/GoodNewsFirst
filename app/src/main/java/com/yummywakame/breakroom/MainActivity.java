@@ -38,19 +38,9 @@ public class MainActivity extends AppCompatActivity
         implements LoaderCallbacks<List<NewsArticle>> {
 
     /**
-     * API Key Value which you need to store in your gradle.properties file as:
-     * GoodNewsFirst_GuardianApp_ApiKey="your-api-key-would-go-here"
-     */
-    private static final String apiKey = BuildConfig.ApiKey;
-
-    /**
      * URL for article data from the Guardian dataset
      */
-    private static final String GUARDIAN_REQUEST_URL =
-            "https://content.guardianapis.com/search?tag=world%2Fseries%2Fthe-upside-weekly-report"
-                    + "&order-by=newest&show-fields=all"
-                    + "&page-size=10&show-most-viewed=true&hide-recent-content=true"
-                    + "&api-key=" + apiKey;
+    private static final String GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.SECTION_NEWS);
 
     /**
      * Constant value for the article loader ID. We can choose any integer.
