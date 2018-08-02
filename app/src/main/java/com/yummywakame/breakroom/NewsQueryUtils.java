@@ -249,26 +249,31 @@ public final class NewsQueryUtils {
      */
     private static Bitmap downloadBitmap(String originalUrl) {
         Bitmap bitmap = null;
-        // replace the end of the originalUrl into a newUrl string
+        // If thumbnail exists, replace the end of the originalUrl into a newUrl string
         // (e.g. /500.jpg or similar) with /1000.jpg
-        String newUrl = originalUrl.replace
-                (originalUrl.substring(originalUrl.lastIndexOf("/")),"/1000.jpg");
-        try {
-            // see if the higher-res image exists
-            InputStream inputStream = new URL(newUrl).openStream();
-            bitmap = BitmapFactory.decodeStream(inputStream);
-        } catch (Exception e) {
+        if (!"".equals(originalUrl)) {
+            String newUrl = originalUrl.replace
+                    (originalUrl.substring(originalUrl.lastIndexOf("/")), "/1000.jpg");
+
             try {
-                // if no higher-res image is found, revert to original image url
-                InputStream inputStream = new URL(originalUrl).openStream();
+                // see if the higher-res image exists
+                InputStream inputStream = new URL(newUrl).openStream();
                 bitmap = BitmapFactory.decodeStream(inputStream);
-            } catch (Exception ignored) {
+            } catch (Exception e) {
+                try {
+                    // if no higher-res image is found, revert to original image url
+                    InputStream inputStream = new URL(originalUrl).openStream();
+                    bitmap = BitmapFactory.decodeStream(inputStream);
+                } catch (Exception ignored) {
+                }
             }
         }
         return bitmap;
     }
 
-    /** Checks to see if there is a network connection when needed */
+    /**
+     * Checks to see if there is a network connection when needed
+     */
     public static boolean isConnected(Context context) {
         boolean connected = false;
         // Get a reference to the ConnectivityManager to check state of network connectivity
