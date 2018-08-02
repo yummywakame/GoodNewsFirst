@@ -22,6 +22,9 @@ import android.content.Loader;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity
     private static final String GUARDIAN_REQUEST_URL =
             "https://content.guardianapis.com/search?tag=world%2Fseries%2Fthe-upside-weekly-report"
                     + "&order-by=newest&show-fields=all"
+                    + "&page-size=10&show-most-viewed=true&hide-recent-content=true"
                     + "&api-key=" + apiKey;
 
     /**
@@ -83,6 +87,12 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Find the menu toolbar for app compat
+        Toolbar mToolbar = findViewById(R.id.main_toolbar);
+        setSupportActionBar(mToolbar);
+        // Hide the default title to use the designed one instead
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // Find a reference to the {@link ListView} in the layout
         articleListView = findViewById(R.id.list);
@@ -170,12 +180,30 @@ public class MainActivity extends AppCompatActivity
                 mEmptyStateTextView.setText(R.string.no_internet_connection);
             }
         }
-
     }
 
     @Override
     public void onLoaderReset(Loader<List<NewsArticle>> loader) {
         // Loader reset, so we can clear out our existing data.
         mAdapter.clear();
+    }
+
+    @Override
+    // This method initialize the contents of the Activity's options menu
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    // This method is called whenever an item in the options menu is selected.
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

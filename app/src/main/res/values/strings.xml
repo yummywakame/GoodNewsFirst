@@ -14,9 +14,12 @@
     <string name="article_time">08:00</string>
     <string name="article_headline">News Headline</string>
 
-
     <!-- Image descriptions -->
     <string name="image_desc_article_image">Article image - no description available from API.</string>
     <string name="image_desc_app_logo">App Logo - showing a thumbs up.</string>
     <string name="image_desc_guardian_logo">Guardian Logo</string>
+
+    <!-- Settings text -->
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_title">News Settings</string>
 </resources>
