@@ -23,7 +23,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements LoaderCallbacks<List<NewsArticle>> {
+        implements LoaderManager.LoaderCallbacks<List<NewsArticle>> {
 
     /**
      * URL for article data from the Guardian dataset
@@ -68,11 +67,6 @@ public class MainActivity extends AppCompatActivity
      * ProgressBar Spinner that is displayed while data is being downloaded
      */
     private ProgressBar mSpinnerView;
-
-    /**
-     * Manages manual loading and reloading of data
-     */
-    private LoaderManager loaderManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,13 +115,10 @@ public class MainActivity extends AppCompatActivity
 
         // If there is a network connection, fetch data
         if (NewsQueryUtils.isConnected(getBaseContext())) {
-            // Get a reference to the LoaderManager, in order to interact with loaders.
-            loaderManager = getLoaderManager();
-
             // Initialize the loader. Pass in the int ID constant defined above and pass in null for
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
-            loaderManager.initLoader(ARTICLE_LOADER_ID, null, this);
+            getLoaderManager().initLoader(ARTICLE_LOADER_ID, null, this);
 
         } else {
             // Otherwise, display error
@@ -191,7 +182,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_refresh:
-//                loaderManager.destroyLoader(LOADER_ID);
+//                getLoaderManager().destroyLoader(LOADER_ID);
 //                Log.e(LOG_TAG, "destroyLoader called");
 //                loadData();
                 return true;
