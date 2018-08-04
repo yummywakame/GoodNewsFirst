@@ -205,14 +205,15 @@ public final class NewsQueryUtils {
                 // Target the fields object that contains all the elements we need
                 JSONObject jsonObjectFields = currentArticle.getJSONObject("fields");
 
-                // Note:    optString()will return null when fails.
+                // Note:    optString() will return null when fails.
                 //          getString() will throw exception when it fails.
 
-                webSectionName = currentArticle.getString("sectionName");
+                webSectionName = currentArticle.optString("sectionName");
                 webPublicationDate = jsonObjectFields.getString("firstPublicationDate");
                 webTitle = jsonObjectFields.getString("headline");
                 webTrailText = jsonObjectFields.optString("trailText");
                 webUrl = jsonObjectFields.getString("shortUrl");
+                if (webUrl == null || webUrl.isEmpty()) webUrl = "https://https://theguardian.com/us/";
                 byLine = jsonObjectFields.optString("byline");
                 thumbnail = jsonObjectFields.optString("thumbnail");
 
