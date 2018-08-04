@@ -23,6 +23,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -186,14 +187,21 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    // This method is called whenever an item in the options menu is selected.
+    // This method is called whenever an button in the Toolbar is selected.
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            Intent settingsIntent = new Intent(this, SettingsActivity.class);
-            startActivity(settingsIntent);
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+//                loaderManager.destroyLoader(LOADER_ID);
+//                Log.e(LOG_TAG, "destroyLoader called");
+//                loadData();
+                return true;
+            case R.id.action_settings:
+                Intent settingsIntent = new Intent(this, SettingsActivity.class);
+                startActivity(settingsIntent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 }
