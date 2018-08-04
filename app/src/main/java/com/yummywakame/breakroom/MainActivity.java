@@ -16,13 +16,14 @@
 package com.yummywakame.breakroom;
 
 import android.app.LoaderManager;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Intent;
 import android.content.Loader;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,6 +37,11 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<NewsArticle>> {
+
+    /**
+     * Tag for the log messages
+     */
+    private static final String LOG_TAG = MainActivity.class.getSimpleName() + " - LOG";
 
     /**
      * URL for article data from the Guardian dataset
@@ -68,6 +74,11 @@ public class MainActivity extends AppCompatActivity
      */
     private ProgressBar mSpinnerView;
 
+    /**
+     * Swipe to reload spinner that is displayed while data is being downloaded
+     */
+    private SwipeRefreshLayout swipeContainer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +88,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar mToolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(mToolbar);
         // Hide the default title to use the designed one instead
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // Find a reference to the {@link ListView} in the layout
         articleListView = findViewById(R.id.list);
@@ -114,21 +125,23 @@ public class MainActivity extends AppCompatActivity
         });
 
         // If there is a network connection, fetch data
-        if (NewsQueryUtils.isConnected(getBaseContext())) {
-            // Initialize the loader. Pass in the int ID constant defined above and pass in null for
-            // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
-            // because this activity implements the LoaderCallbacks interface).
-            getLoaderManager().initLoader(ARTICLE_LOADER_ID, null, this);
+        loadData();
 
-        } else {
-            // Otherwise, display error
-            // First, hide loading indicator so error message will be visible
-            View loadingIndicator = findViewById(R.id.loading_spinner);
-            loadingIndicator.setVisibility(View.GONE);
-
-            // Update empty state with no connection error message
-            mEmptyStateTextView.setText(R.string.no_internet_connection);
-        }
+        // Lookup the swipe container view
+        swipeContainer = findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Check for internet connection and attempt to load data
+                loadData();
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
     }
 
     @Override
@@ -142,6 +155,10 @@ public class MainActivity extends AppCompatActivity
         // hide the Loading Indicator
         mSpinnerView = findViewById(R.id.loading_spinner);
         mSpinnerView.setVisibility(mSpinnerView.GONE);
+
+        // Hide swipe to reload spinner
+        swipeContainer.setRefreshing(false);
+
 
         // Set empty state text to display "No news articles found."
         mEmptyStateTextView.setText(R.string.no_articles);
@@ -182,9 +199,8 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_refresh:
-//                getLoaderManager().destroyLoader(LOADER_ID);
-//                Log.e(LOG_TAG, "destroyLoader called");
-//                loadData();
+                Log.i(LOG_TAG, "destroyLoaderCalled.");
+                loadData();
                 return true;
             case R.id.action_settings:
                 Intent settingsIntent = new Intent(this, SettingsActivity.class);
@@ -194,5 +210,28 @@ public class MainActivity extends AppCompatActivity
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * Loads and reloads the data as requested
+     */
+    public void loadData() {
+        // If there is a network connection, fetch data
+        if (NewsQueryUtils.isConnected(getBaseContext())) {
+            // Initialize the loader. Pass in the int ID constant defined above and pass in null for
+            // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
+            // because this activity implements the LoaderCallbacks interface).
+            getLoaderManager().initLoader(ARTICLE_LOADER_ID, null, this);
+
+        } else {
+            // Otherwise, display error
+            // First, hide loading indicator so error message will be visible
+            View loadingIndicator = findViewById(R.id.loading_spinner);
+            loadingIndicator.setVisibility(View.GONE);
+
+            // Update empty state with no connection error message
+            mEmptyStateTextView.setText(R.string.no_internet_connection);
+        }
+//        swipeContainer.setRefreshing(false);
     }
 }

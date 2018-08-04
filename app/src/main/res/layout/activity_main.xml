@@ -96,6 +96,13 @@
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?android:attr/actionBarSize">
+
         <ListView
             android:id="@+id/list"
             android:layout_below="@id/main_toolbar"
@@ -106,5 +113,7 @@
             android:dividerHeight="0dp"
             android:orientation="vertical"
             android:paddingBottom="@dimen/margin_s" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

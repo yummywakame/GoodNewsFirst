@@ -33,5 +33,4 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     // jsoup HTML parser library @ https://jsoup.org/
     implementation 'org.jsoup:jsoup:1.11.3'
-
 }
