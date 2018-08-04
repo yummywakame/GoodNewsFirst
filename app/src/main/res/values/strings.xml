@@ -19,7 +19,10 @@
     <string name="image_desc_app_logo">App Logo - showing a thumbs up.</string>
     <string name="image_desc_guardian_logo">Guardian Logo</string>
 
-    <!-- Settings text -->
+    <!-- Settings Images -->
     <string name="settings_menu_item">Settings</string>
+    <string name="refresh_menu_item">Refresh</string>
+
+    <!-- Settings Text -->
     <string name="settings_title">News Settings</string>
 </resources>
