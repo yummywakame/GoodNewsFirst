@@ -51,14 +51,6 @@
         android:gravity="center_horizontal"
         android:textAppearance="@style/SplashEmptyText" />
 
-    <!-- The spinning progress bar is only visible while waiting for list items. -->
-    <ProgressBar
-        android:id="@+id/loading_spinner"
-        style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
-
     <!-- Custom toolbar for custom fonts and images -->
     <android.support.v7.widget.Toolbar
         android:id="@+id/main_toolbar"

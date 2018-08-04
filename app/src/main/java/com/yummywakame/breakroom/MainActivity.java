@@ -31,6 +31,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity
     /**
      * ProgressBar Spinner that is displayed while data is being downloaded
      */
-    private ProgressBar mSpinnerView;
+    private LoaderManager loaderManager;
 
     /**
      * Swipe to reload spinner that is displayed while data is being downloaded
@@ -87,8 +88,14 @@ public class MainActivity extends AppCompatActivity
         // Find the menu toolbar for app compat
         Toolbar mToolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(mToolbar);
+
         // Hide the default title to use the designed one instead
-//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        // Lookup the swipe container view
+        swipeContainer = findViewById(R.id.swipeContainer);
+        swipeContainer.setRefreshing(true);
+
 
         // Find a reference to the {@link ListView} in the layout
         articleListView = findViewById(R.id.list);
@@ -127,8 +134,7 @@ public class MainActivity extends AppCompatActivity
         // If there is a network connection, fetch data
         loadData();
 
-        // Lookup the swipe container view
-        swipeContainer = findViewById(R.id.swipeContainer);
+
         // Setup refresh listener which triggers new data loading
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -138,10 +144,11 @@ public class MainActivity extends AppCompatActivity
             }
         });
         // Configure the refreshing colors
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+        swipeContainer.setColorSchemeResources(
+                R.color.primaryHilight,
+                R.color.secondaryHilight,
                 android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+                android.R.color.holo_orange_light);
     }
 
     @Override
@@ -152,9 +159,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(Loader<List<NewsArticle>> loader, List<NewsArticle> newsArticles) {
-        // hide the Loading Indicator
-        mSpinnerView = findViewById(R.id.loading_spinner);
-        mSpinnerView.setVisibility(mSpinnerView.GONE);
 
         // Hide swipe to reload spinner
         swipeContainer.setRefreshing(false);
@@ -199,7 +203,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_refresh:
-                Log.i(LOG_TAG, "destroyLoaderCalled.");
+                swipeContainer.setRefreshing(true);
                 loadData();
                 return true;
             case R.id.action_settings:
@@ -226,12 +230,12 @@ public class MainActivity extends AppCompatActivity
         } else {
             // Otherwise, display error
             // First, hide loading indicator so error message will be visible
-            View loadingIndicator = findViewById(R.id.loading_spinner);
-            loadingIndicator.setVisibility(View.GONE);
+            swipeContainer.setRefreshing(false);
 
             // Update empty state with no connection error message
             mEmptyStateTextView.setText(R.string.no_internet_connection);
+            Toast.makeText(getApplicationContext(), R.string.no_internet_connection, Toast.LENGTH_LONG).show();
+
         }
-//        swipeContainer.setRefreshing(false);
     }
 }
