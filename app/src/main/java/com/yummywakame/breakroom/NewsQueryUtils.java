@@ -27,6 +27,7 @@ import android.graphics.BitmapFactory;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -172,7 +173,6 @@ public final class NewsQueryUtils {
         String webTrailText;
         String byLine;
         String thumbnail;
-
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(articleJSON)) {
             Log.v(LOG_TAG, "The JSON string is empty or null. Returning early.");
@@ -221,7 +221,7 @@ public final class NewsQueryUtils {
                         webSectionName,
                         webPublicationDate,
                         webTitle,
-                        webTrailText,
+                        html2text(webTrailText),
                         webUrl,
                         byLine,
                         downloadBitmap(thumbnail)
@@ -237,6 +237,13 @@ public final class NewsQueryUtils {
 
         // Return the list of newsArticles
         return newsArticles;
+    }
+
+    /**
+     * Strip out possible HTML tags from the webTrailText using jSoup
+     */
+    public static String html2text(String html) {
+        return Jsoup.parse(html).text();
     }
 
     /**

@@ -1,6 +1,9 @@
 package com.yummywakame.breakroom;
 
 import android.support.annotation.Nullable;
+import android.util.Log;
+
+import java.net.URL;
 
 /**
  * GoodNewsFirst
@@ -10,12 +13,30 @@ import android.support.annotation.Nullable;
  */
 public final class UrlConstructor {
 
+    // Tag for the log messages
+    private static final String LOG_TAG = "UrlConstructor";
+
     // URL Base
     private static final String URL_BASE = "https://content.guardianapis.com/search?";
 
     // Chosen Segments: Sections or Tags
-    public static final String TAG_GOODNEWS = "tag=world%2Fseries%2Fthe-upside-weekly-report";
-    public static final String SECTION_NEWS = "section=news";
+    public static final String TAG_GOODNEWS = "tag=world/series/the-upside-weekly-report";
+    public static final String SECTION_US_NEWS = "section=us-news";
+    public static final String SECTION_WORLD_NEWS = "section=world";
+    public static final String SECTION_SPORT = "section=sport&editions=us/sport";
+    public static final String SECTION_ART_AND_DESIGN = "section=artanddesign";
+    public static final String SECTION_BUSINESS = "section=business&editions=us/business";
+    public static final String SECTION_CULTURE = "section=culture&editions=us/culture";
+    public static final String SECTION_EDUCATION = "section=education&editions=us/education";
+    public static final String SECTION_ENVIRONMENT = "section=environment&editions=us/environment";
+    public static final String SECTION_FILM = "section=film&editions=us/film";
+    public static final String SECTION_LIFEANDSTYLE = "section=lifeandstyle&editions=us/lifeandstyle";
+    public static final String SECTION_MUSIC = "section=music";
+    public static final String SECTION_POLITICS = "tag=us-news/us-politics";
+    public static final String SECTION_SCIENCE = "section=science";
+    public static final String SECTION_TECHNOLOGY = "section=technology&editions=us/technology";
+    public static final String SECTION_TRAVEL = "section=travel&editions=us/travel";
+    public static final String SECTION_WOMEN_IN_LEADERSHIP = "section=women-in-leadership";
 
     // Extras at the end of the URL string
     private static final String URL_EXTRAS = "&show-fields=all&page-size=10&currentPage=1";
@@ -48,6 +69,9 @@ public final class UrlConstructor {
 
         // Add the API Key
         stringBuilder.append(URL_API_KEY);
+
+        // LOG the API URL
+        Log.i(LOG_TAG, "API GUARDIAN_REQUEST_URL: "+ stringBuilder.toString());
 
         return stringBuilder.toString();
     }

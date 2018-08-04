@@ -19,6 +19,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,7 +107,7 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         timeView.setText(formattedTime);
 
         // Get the author from the NewsArticle object
-        String newsAuthor = "By " + currentNewsArticle.getAuthor() + " ";
+        String newsAuthor = currentNewsArticle.getAuthor() + " ";
         // Find the TextView with view ID article_author
         TextView authorView = listItemView.findViewById(R.id.article_author);
         // Display the location of the current article in that TextView
@@ -116,7 +118,18 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         // Find the ImageView with the ID article_image
         ImageView photoView = listItemView.findViewById(R.id.article_image);
         // Display the image in that ImageView
-        photoView.setImageBitmap(newsPhoto);
+        if (newsPhoto != null) {
+            photoView.setImageBitmap(newsPhoto);
+        } else {
+            // target and shorten the aspect-ratio for photoView
+            ConstraintLayout constraintLayout = listItemView.findViewById(R.id.newslist_constraint_layout);
+            ConstraintSet set = new ConstraintSet();
+            set.clone(constraintLayout);
+            set.setDimensionRatio(photoView.getId(), "16:6");
+            set.applyTo(constraintLayout);
+            // set background color
+            photoView.setImageResource(R.color.primaryColor);
+        }
 
         // Return the list item view that is now showing the appropriate data
         return listItemView;

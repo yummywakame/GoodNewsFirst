@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity
     /**
      * URL for article data from the Guardian dataset
      */
-    private static final String GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.SECTION_NEWS);
+    private static final String GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.TAG_GOODNEWS);
 
     /**
      * Constant value for the article loader ID. We can choose any integer.

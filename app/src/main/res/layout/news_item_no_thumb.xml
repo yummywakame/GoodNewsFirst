@@ -12,6 +12,7 @@
 <!-- Layout for a single list item that displays an newsArticle -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/backgroundColor"
@@ -44,21 +45,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
-                app:constraint_referenced_ids="scrim,article_image" />
+                app:constraint_referenced_ids="article_image,scrim" />
 
             <ImageView
                 android:id="@+id/article_image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/image_desc_article_image"
+                android:contentDescription="@null"
                 android:scaleType="centerCrop"
-                app:layout_constraintDimensionRatio="h,16:9"
+                app:layout_constraintBottom_toBottomOf="@+id/bookmark_tail"
                 app:layout_constraintEnd_toEndOf="@+id/newslist_constraint_layout"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/newslist_constraint_layout"
                 app:layout_constraintTop_toTopOf="@+id/newslist_constraint_layout"
-                app:srcCompat="@drawable/guardian_placeholder" />
+                app:srcCompat="@android:color/background_dark" />
 
             <ImageView
                 android:id="@+id/scrim"
@@ -76,9 +76,11 @@
                 android:id="@+id/article_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
                 android:ellipsize="end"
                 android:letterSpacing="0.05"
-                android:maxLines="3"
+                android:maxLines="4"
                 android:paddingBottom="@dimen/margin_s"
                 android:paddingEnd="@dimen/margin_s"
                 android:paddingStart="@dimen/margin_s"
@@ -86,9 +88,10 @@
                 android:text="@string/article_headline"
                 android:textAppearance="@style/ArticleTitleText"
                 app:layout_constraintBottom_toBottomOf="@+id/article_image"
-                app:layout_constraintEnd_toEndOf="@+id/article_image"
+                app:layout_constraintEnd_toStartOf="@+id/article_time"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/article_image" />
+                app:layout_constraintStart_toStartOf="@+id/article_image"
+                app:layout_constraintTop_toTopOf="@+id/scrim" />
 
             <TextView
                 android:id="@+id/article_trailtext"
@@ -111,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/backgroundColorOverlay"
                 android:ellipsize="end"
-                android:gravity="center_vertical|start"
+                android:gravity="left|center_vertical|start"
                 android:maxLines="1"
                 android:paddingBottom="@dimen/margin_s"
                 android:paddingEnd="@dimen/margin_s"
@@ -127,9 +130,9 @@
                 android:id="@+id/article_section"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_gravity="right|center_vertical|end"
+                android:layout_gravity="end"
                 android:background="@color/backgroundColorOverlay"
-                android:gravity="center_vertical|end"
+                android:gravity="right|center_vertical|end"
                 android:maxLines="1"
                 android:paddingBottom="@dimen/margin_s"
                 android:paddingEnd="@dimen/margin_s"

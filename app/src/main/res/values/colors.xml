@@ -6,6 +6,8 @@
     <color name="primaryDark">#141d26</color>
     <!-- color used for cardview background -->
     <color name="backgroundColorOverlay">#141d26</color>
+    <!-- color used for cardview background when no thumbnail -->
+    <color name="backgroundColorOverlayBlack">#000000</color>
     <!-- App's background color -->
     <color name="backgroundColor">#2e3a47</color>
     <!-- Accent color of the app -->

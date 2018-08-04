@@ -5,6 +5,8 @@
     <dimen name="margin_s">8dp</dimen>
     <dimen name="margin_m">16dp</dimen>
     <dimen name="margin_l">24dp</dimen>
+    <dimen name="margin_xl">32dp</dimen>
+    <dimen name="margin_xxl">40dp</dimen>
     <dimen name="margin_xxxl">48dp</dimen>
     <dimen name="portrait_splash_padding">50dp</dimen>
 

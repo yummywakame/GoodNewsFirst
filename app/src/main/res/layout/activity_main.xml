@@ -42,8 +42,13 @@
         android:id="@+id/feedback_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_xl"
+        android:layout_marginLeft="@dimen/margin_xl"
+        android:layout_marginEnd="@dimen/margin_xl"
+        android:layout_marginRight="@dimen/margin_xl"
         android:layout_below="@id/splash_logo"
         android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
         android:textAppearance="@style/SplashEmptyText" />
 
     <!-- The spinning progress bar is only visible while waiting for list items. -->
