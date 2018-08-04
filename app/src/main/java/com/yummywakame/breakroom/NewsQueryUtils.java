@@ -213,7 +213,6 @@ public final class NewsQueryUtils {
                 webTitle = jsonObjectFields.getString("headline");
                 webTrailText = jsonObjectFields.optString("trailText");
                 webUrl = jsonObjectFields.getString("shortUrl");
-                if (webUrl == null || webUrl.isEmpty()) webUrl = "https://https://theguardian.com/us/";
                 byLine = jsonObjectFields.optString("byline");
                 thumbnail = jsonObjectFields.optString("thumbnail");
 

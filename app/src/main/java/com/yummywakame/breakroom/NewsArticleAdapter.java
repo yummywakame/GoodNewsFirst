@@ -85,11 +85,16 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         titleView.setText(newsTitle);
 
         // Get the trailtext from the NewsArticle object
-        String newsTrail = currentNewsArticle.getTrailText() + ".";
+        String newsTrail = currentNewsArticle.getTrailText();
         // Find the TextView with view ID trail article_trailtext
         TextView trailView = listItemView.findViewById(R.id.article_trailtext);
-        // Display the location of the current article in that TextView
-        trailView.setText(newsTrail);
+        // Display the trailtext for the current article in that TextView or hide it if null
+        if (newsTrail != null && !newsTrail.isEmpty()) {
+            newsTrail = newsTrail+".";
+            trailView.setText(newsTrail);
+        } else {
+            trailView.setVisibility(View.GONE);
+        }
 
         // Create a new Date object from the time in milliseconds of the article
         // Format the article_date string (i.e. "Mar 3, '18")
