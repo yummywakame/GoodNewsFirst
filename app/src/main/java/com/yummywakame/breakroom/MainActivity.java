@@ -23,13 +23,11 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,7 +45,7 @@ public class MainActivity extends AppCompatActivity
     /**
      * URL for article data from the Guardian dataset
      */
-    private static final String GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.TAG_GOODNEWS);
+    private static final String GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.SECTION_TECHNOLOGY);
 
     /**
      * Constant value for the article loader ID. We can choose any integer.
@@ -133,7 +131,6 @@ public class MainActivity extends AppCompatActivity
 
         // If there is a network connection, fetch data
         loadData();
-
 
         // Setup refresh listener which triggers new data loading
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

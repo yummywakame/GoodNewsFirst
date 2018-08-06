@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/general_category">
+        <EditTextPreference
+            android:defaultValue="@string/pref_topic_default"
+            android:key="@string/pref_topic_key"
+            android:selectAllOnFocus="true"
+            android:title="@string/pref_topic_title" />
+
+        <ListPreference
+            android:defaultValue="@string/pref_order_by_default"
+            android:entries="@array/pref_order_by_labels"
+            android:entryValues="@array/pref_order_by_values"
+            android:key="@string/pref_order_by_key"
+            android:title="@string/pref_order_by_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/metadata_category">
+        <CheckBoxPreference
+            android:defaultValue="@bool/pref_thumbnail_default"
+            android:key="@string/pref_thumbnail_key"
+            android:summaryOff="@string/pref_thumbnail_summary_off"
+            android:summaryOn="@string/pref_thumbnail_summary_on"
+            android:title="@string/pref_thumbnail_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="@bool/pref_contributors_default"
+            android:key="@string/pref_contributors_key"
+            android:summaryOff="@string/pref_contributors_summary_off"
+            android:summaryOn="@string/pref_contributors_summary_on"
+            android:title="@string/pref_contributors_title" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

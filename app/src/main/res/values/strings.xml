@@ -25,4 +25,41 @@
 
     <!-- Settings Text -->
     <string name="settings_title">News Settings</string>
+
+
+    <!--Query values-->
+    <string name="thumbnails_query_value">thumbnail</string>
+    <string name="contributors_query_value">contributor</string>
+    <!--Preference categories-->
+    <string name="general_category">General</string>
+    <string name="metadata_category">Metadata</string>
+
+    <!-- Topic preference -->
+    <string name="pref_topic_title">Topic Of Interest</string>
+    <string name="pref_topic_key" translatable="false">topic_of_interest</string>
+    <string name="pref_topic_default">android</string>
+
+    <!-- Order preference-->
+    <string name="pref_order_by_title">Order By</string>
+    <string name="pref_order_by_key" translatable="false">order_by</string>
+    <string name="pref_order_by_default">@string/pref_order_by_newest_value</string>
+    <string name="pref_order_by_newest_label">Newest</string>
+    <string name="pref_order_by_oldest_label">Oldest</string>
+    <string name="pref_order_by_relevance_label">Relevance</string>
+    <string name="pref_order_by_newest_value" translatable="false">newest</string>
+    <string name="pref_order_by_oldest_value" translatable="false">oldest</string>
+    <string name="pref_order_by_relevance_value" translatable="false">relevance</string>
+
+    <!--Thumbnails preference-->
+    <string name="pref_thumbnail_title">Display Thumbnails</string>
+    <string name="pref_thumbnail_key" translatable="false">display_images</string>
+    <string name="pref_thumbnail_summary_on">Shown</string>
+    <string name="pref_thumbnail_summary_off">Hidden</string>
+
+    <!--Contributors preference-->
+    <string name="pref_contributors_title">Display Contributors</string>
+    <string name="pref_contributors_key" translatable="false">display_contributors</string>
+    <string name="pref_contributors_summary_on">Shown</string>
+    <string name="pref_contributors_summary_off">Hidden</string>
+
 </resources>

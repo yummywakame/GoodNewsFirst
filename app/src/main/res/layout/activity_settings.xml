@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Layout for our Settings Activity, containing a Preference Fragment -->
 <fragment
-    android:id="@+id/settings"
+    android:id="@+id/list_container"
     android:name="com.yummywakame.breakroom.SettingsActivity$NewsPreferenceFragment"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.yummywakame.breakroom.SettingsActivity">
+    tools:context=".MainActivity">
 </fragment>

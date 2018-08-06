@@ -22,7 +22,7 @@
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.yummywakame.breakroom.MainActivity"/>
+                android:value=".MainActivity"/>
         </activity>
     </application>
 
