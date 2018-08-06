@@ -19,7 +19,7 @@ Coming soon!
 2. In your gradle.properties file add: GoodNewsFirst_GuardianApp_ApiKey="your-API-key-goes-here".
 3. Based on instructions here: https://medium.com/code-better/hiding-api-keys-from-your-android-repository-b23f5598b906
 
-*Pull to refresh:* _(Coming soon!)_
+*Pull to refresh:*
 https://guides.codepath.com/android/implementing-pull-to-refresh-guide
 
 *Guardian Logo for attribution:*
