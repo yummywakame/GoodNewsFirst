@@ -19,7 +19,8 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/settings_title"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingsFragmentTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>

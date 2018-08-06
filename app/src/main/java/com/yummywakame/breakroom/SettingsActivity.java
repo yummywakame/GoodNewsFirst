@@ -36,12 +36,6 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         setTheme(R.style.SettingsFragmentTheme);
 
-        // Find the menu toolbar for app compat
-//        Toolbar mToolbar = findViewById(R.id.main_toolbar);
-//        setSupportActionBar(mToolbar);
-
-        // Hide the default title to use the designed one instead
-//        getSupportActionBar().setDisplayShowTitleEnabled(true);
     }
 
     public static class NewsPreferenceFragment extends PreferenceFragment
