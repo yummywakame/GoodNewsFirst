@@ -75,12 +75,15 @@
         <item name="android:textColorPrimary">@color/primaryTextColor</item>
         <item name="android:textColorSecondary">@color/primaryLight</item>
         <item name="android:fontFamily">@font/ubuntu</item>
-        <item name="android:dialogTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <!-- Dialog Styles -->
+        <item name="android:dialogTheme">@style/DialogStyle</item>
+        <item name="android:alertDialogTheme">@style/DialogStyle</item>
     </style>
-
+    <!-- Settings Dialog Styles -->
     <style name="DialogStyle" parent="@style/Theme.AppCompat.Dialog">
-        <item name="android:textColorPrimary">@color/primaryDark</item>
+        <item name="android:textColorPrimary">@color/primaryHilight</item>
         <item name="android:background">@color/backgroundColor</item>
+        <item name="colorAccent">@color/secondaryHilight</item>
     </style>
 
 </resources>

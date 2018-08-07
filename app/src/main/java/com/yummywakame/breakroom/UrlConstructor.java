@@ -3,8 +3,6 @@ package com.yummywakame.breakroom;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import java.net.URL;
-
 /**
  * GoodNewsFirst
  * Created by Olivia Meiring on 2018/08/02.
@@ -19,7 +17,7 @@ public final class UrlConstructor {
     // URL Base
     private static final String URL_BASE = "https://content.guardianapis.com/search?";
 
-    // Chosen Segments: Sections or Tags
+    // Section choices:
     public static final String TAG_GOODNEWS = "tag=world/series/the-upside-weekly-report";
     public static final String SECTION_US_NEWS = "section=us-news";
     public static final String SECTION_WORLD_NEWS = "section=world";
@@ -52,17 +50,21 @@ public final class UrlConstructor {
 
     /**
      * Returns a Guardian API URL string from all the components
-     * @param segment section or tag in Guardian
+     * @param section section or tag in Guardian
      * @return URL string
      */
-    public static String constructUrl(@Nullable String segment) {
+    public static String constructUrl(@Nullable String section) {
         StringBuilder stringBuilder = new StringBuilder();
 
         // Add the URL Base
         stringBuilder.append(URL_BASE);
 
         // If the section isn't null then add that
-        if (segment != null) stringBuilder.append(segment);
+        if (section != null) {
+            stringBuilder.append(section);
+        } else {
+            stringBuilder.append(TAG_GOODNEWS);
+        }
 
         // Add the extras
         stringBuilder.append(URL_EXTRAS);
