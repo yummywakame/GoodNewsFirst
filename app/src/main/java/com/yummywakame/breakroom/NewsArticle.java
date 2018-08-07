@@ -50,6 +50,7 @@ public class NewsArticle {
         this.byLine = byLine;
         this.thumbnail = thumbnail;
     }
+
     public String getSectionName() {
         return webSectionName;
     }

@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/general_category">
-        <EditTextPreference
-            android:defaultValue="@string/pref_topic_default"
-            android:key="@string/pref_topic_key"
-            android:selectAllOnFocus="true"
-            android:title="@string/pref_topic_title" />
 
         <ListPreference
             android:defaultValue="@string/pref_order_by_default"
@@ -13,6 +8,14 @@
             android:entryValues="@array/pref_order_by_values"
             android:key="@string/pref_order_by_key"
             android:title="@string/pref_order_by_title" />
+
+        <ListPreference
+            android:defaultValue="@string/pref_topic_default"
+            android:entries="@array/pref_topic_labels"
+            android:entryValues="@array/pref_topic_values"
+            android:key="@string/pref_topic_key"
+            android:title="@string/pref_topic_title"
+            android:dialogTitle="@string/pref_topic_title"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/metadata_category">

@@ -15,6 +15,7 @@
  */
 package com.yummywakame.breakroom;
 
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -22,6 +23,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -42,70 +44,43 @@ public class SettingsActivity extends AppCompatActivity {
             implements Preference.OnPreferenceChangeListener{
 
         @Override
-        public void onCreate(Bundle savedInstanceState) {
-
+        public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.settings_main);
-
-//            Preference topic = findPreference(getString(R.string.settings_topic_key));
-//            bindPreferenceSummaryToValue(topic);
-//
-//            Preference search = findPreference(getString(R.string.settings_search_key));
-//            bindPreferenceSummaryToValue(search);
-//
-//            Preference fromDate = findPreference(getString(R.string.settings_from_date_key));
-//            bindPreferenceSummaryToValue(fromDate);
-//
-//            Preference toDate = findPreference(getString(R.string.settings_to_date_key));
-//            bindPreferenceSummaryToValue(toDate);
-//
-//            Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
-//            bindPreferenceSummaryToValue(orderBy);
-//
-//            Preference todayDate = findPreference(getString(R.string.settings_switch_key));
-//            checkSwitchValue(todayDate);
+            // topics preference
+            Preference topic = findPreference(getString(R.string.pref_topic_key));
+            setPreferenceSummary(topic);
+            // order by preference
+            Preference orderBy = findPreference(getString(R.string.pref_order_by_key));
+            setPreferenceSummary(orderBy);
         }
 
         @Override
-        public boolean onPreferenceChange(Preference preference, Object value) {
-            String stringValue = value.toString();
+        public boolean onPreferenceChange(Preference preference, Object newValue) {
+            String newStringVal = newValue.toString();
 
             if (preference instanceof ListPreference) {
                 ListPreference listPreference = (ListPreference) preference;
-                int prefIndex = listPreference.findIndexOfValue(stringValue);
+                int prefIndex = listPreference.findIndexOfValue(newStringVal);
                 if (prefIndex >= 0) {
-                    CharSequence[]labels = listPreference.getEntries();
-                    preference.setSummary(labels[prefIndex]);
+                    CharSequence[] labels = listPreference.getEntries();
+                    CharSequence summaryLabel = labels[prefIndex];
+                    newStringVal = summaryLabel.toString();
                 }
             }
-            else if (preference instanceof SwitchPreference) {
-                Log.e("Switch is set to: ", stringValue);
-                Preference toDate = findPreference("to-date");
-                if(stringValue.equals("true")){
-                    toDate.setEnabled(false);
-                } else{
-                    toDate.setEnabled(true);
-                }
-            }
-            else{
-                preference.setSummary(stringValue);
-            }
-
+            preference.setSummary(newStringVal);
             return true;
         }
 
-        private void bindPreferenceSummaryToValue(Preference preference) {
+        private void setPreferenceSummary(Preference preference) {
             preference.setOnPreferenceChangeListener(this);
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(preference.getContext());
-            String preferenceString = preferences.getString(preference.getKey(), "");
-            onPreferenceChange(preference, preferenceString);
-        }
-
-        private void checkSwitchValue(Preference switchPreference) {
-            switchPreference.setOnPreferenceChangeListener(this);
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(switchPreference.getContext());
-            Boolean preferenceBoolean = preferences.getBoolean(switchPreference.getKey(), false);
-            onPreferenceChange(switchPreference, preferenceBoolean);
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(preference.getContext());
+            String preferenceValue = sharedPreferences.getString(
+                    preference.getKey(),
+                    ""
+            );
+            onPreferenceChange(preference, preferenceValue);
         }
     }
+
 }

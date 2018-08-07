@@ -10,4 +10,42 @@
         <item>@string/pref_order_by_oldest_value</item>
         <item>@string/pref_order_by_relevance_value</item>
     </string-array>
+    <string-array name="pref_topic_labels">
+        <item>@string/pref_topic_0_label</item>
+        <item>@string/pref_topic_1_label</item>
+        <item>@string/pref_topic_2_label</item>
+        <item>@string/pref_topic_3_label</item>
+        <item>@string/pref_topic_4_label</item>
+        <item>@string/pref_topic_5_label</item>
+        <item>@string/pref_topic_6_label</item>
+        <item>@string/pref_topic_7_label</item>
+        <item>@string/pref_topic_8_label</item>
+        <item>@string/pref_topic_9_label</item>
+        <item>@string/pref_topic_10_label</item>
+        <item>@string/pref_topic_11_label</item>
+        <item>@string/pref_topic_12_label</item>
+        <item>@string/pref_topic_13_label</item>
+        <item>@string/pref_topic_14_label</item>
+        <item>@string/pref_topic_15_label</item>
+        <item>@string/pref_topic_16_label</item>
+    </string-array>
+    <string-array name="pref_topic_values">
+        <item>@string/pref_topic_0_label_value</item>
+        <item>@string/pref_topic_1_label_value</item>
+        <item>@string/pref_topic_2_label_value</item>
+        <item>@string/pref_topic_3_label_value</item>
+        <item>@string/pref_topic_4_label_value</item>
+        <item>@string/pref_topic_5_label_value</item>
+        <item>@string/pref_topic_6_label_value</item>
+        <item>@string/pref_topic_7_label_value</item>
+        <item>@string/pref_topic_8_label_value</item>
+        <item>@string/pref_topic_9_label_value</item>
+        <item>@string/pref_topic_10_label_value</item>
+        <item>@string/pref_topic_11_label_value</item>
+        <item>@string/pref_topic_12_label_value</item>
+        <item>@string/pref_topic_13_label_value</item>
+        <item>@string/pref_topic_14_label_value</item>
+        <item>@string/pref_topic_15_label_value</item>
+        <item>@string/pref_topic_16_label_value</item>
+    </string-array>
 </resources>

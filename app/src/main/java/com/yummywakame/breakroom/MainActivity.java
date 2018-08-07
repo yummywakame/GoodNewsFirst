@@ -88,7 +88,9 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(mToolbar);
 
         // Hide the default title to use the designed one instead
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
 
         // Lookup the swipe container view
         swipeContainer = findViewById(R.id.swipeContainer);

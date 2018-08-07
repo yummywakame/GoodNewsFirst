@@ -80,7 +80,7 @@
                 android:layout_marginRight="8dp"
                 android:ellipsize="end"
                 android:letterSpacing="0.05"
-                android:maxLines="4"
+                android:maxLines="3"
                 android:paddingBottom="@dimen/margin_s"
                 android:paddingEnd="@dimen/margin_s"
                 android:paddingStart="@dimen/margin_s"
