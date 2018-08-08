@@ -150,14 +150,14 @@ public class MainActivity extends AppCompatActivity
         // Get User Preferences or Defaults from Settings
         String SECTION_CHOICE = getPreferenceStringValue(R.string.pref_topic_key, R.string.pref_topic_default);
         String ORDER_BY = getPreferenceStringValue(R.string.pref_order_by_key, R.string.pref_order_by_default);
-        boolean HAS_THUMBNAIL = getPreferenceBooleanValue(R.string.pref_thumbnail_key, R.bool.pref_thumbnail_default);
-        boolean HAS_CONTRIBUTOR = getPreferenceBooleanValue(R.string.pref_contributors_key, R.bool.pref_contributors_default);
+        boolean PREF_THUMBNAIL = getPreferenceBooleanValue(R.string.pref_thumbnail_key, R.bool.pref_thumbnail_default);
+        boolean PREF_CONTRIBUTOR = getPreferenceBooleanValue(R.string.pref_contributors_key, R.bool.pref_contributors_default);
 
         // Construct the API URL to query the Guardian Dataset
         String GUARDIAN_SECTION = UrlConstructor.constructUrl(SECTION_CHOICE, ORDER_BY);
 
         // Create a new loader for the given URL
-        return new NewsArticleLoader(this, GUARDIAN_SECTION);
+        return new NewsArticleLoader(this, GUARDIAN_SECTION, PREF_THUMBNAIL);
     }
 
     @Override

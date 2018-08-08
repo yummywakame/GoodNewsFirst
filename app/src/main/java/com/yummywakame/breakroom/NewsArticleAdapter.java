@@ -123,8 +123,8 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         // Find the ImageView with the ID article_image
         ImageView photoView = listItemView.findViewById(R.id.article_image);
         // Display the image in that ImageView
-        if (newsPhoto != null) {
-            // If photo available
+        if (newsPhoto != null && NewsArticleLoader.mPrefThumbnail ) {
+            // If photo available or Thumbnail preference is true
             photoView.setImageBitmap(newsPhoto);
         } else {
             // Remove photo and change layout:

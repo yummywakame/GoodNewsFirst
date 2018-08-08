@@ -28,16 +28,19 @@ public class NewsArticleLoader extends AsyncTaskLoader<List<NewsArticle>> {
 
     /** Query URL */
     private String mUrl;
+    public static boolean mPrefThumbnail;
 
     /**
      * Constructs a new {@link NewsArticleLoader}.
      *
      * @param context of the activity
      * @param url to load data from
+     * @param prefThumbnail to load data from
      */
-    public NewsArticleLoader(Context context, String url) {
+    public NewsArticleLoader(Context context, String url, Boolean prefThumbnail) {
         super(context);
         mUrl = url;
+        mPrefThumbnail = prefThumbnail;
     }
 
     @Override
