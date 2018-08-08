@@ -38,7 +38,7 @@
 
     <!-- Article Date / Time TextViews -->
     <style name="ArticleDateTimeText" parent="@style/TextAppearance.AppCompat.Inverse">
-        <item name="android:fontFamily">@font/ubuntu_medium</item>
+        <item name="android:fontFamily">@font/ubuntu_mono_bold</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textSize">@dimen/text_size_xs</item>
         <item name="android:textColor">@color/primaryTextColor</item>

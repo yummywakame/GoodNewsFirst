@@ -124,16 +124,24 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         ImageView photoView = listItemView.findViewById(R.id.article_image);
         // Display the image in that ImageView
         if (newsPhoto != null) {
+            // If photo available
             photoView.setImageBitmap(newsPhoto);
         } else {
+            // Remove photo and change layout:
+            // Increase Title maxlines from 3 to 4
+            titleView.setMaxLines(4);
+
             // target and shorten the aspect-ratio for photoView
             ConstraintLayout constraintLayout = listItemView.findViewById(R.id.newslist_constraint_layout);
             ConstraintSet set = new ConstraintSet();
             set.clone(constraintLayout);
-            set.setDimensionRatio(photoView.getId(), "16:6");
+            set.setDimensionRatio(photoView.getId(), "16:4");
             set.applyTo(constraintLayout);
             // set background color
-            photoView.setImageResource(R.color.primaryColor);
+            photoView.setImageResource(R.color.backgroundColorOverlayBlack);
+
+            // clip end of article_title to start of article_time (bookmark)
+            set.connect(R.id.article_title,ConstraintSet.END,R.id.article_time,ConstraintSet.END,0);
         }
 
         // Return the list item view that is now showing the appropriate data
@@ -152,7 +160,7 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         } catch (final ParseException e) {
             e.printStackTrace();
         }
-        final SimpleDateFormat outputFormatter = new SimpleDateFormat("MMM d ''yy", Locale.US);
+        final SimpleDateFormat outputFormatter = new SimpleDateFormat("MMM dd ''yy", Locale.US);
         return outputFormatter.format(date_out);
     }
 

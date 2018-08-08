@@ -76,6 +76,8 @@
                 android:id="@+id/article_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
                 android:ellipsize="end"
                 android:letterSpacing="0.05"
                 android:maxLines="3"
@@ -86,7 +88,7 @@
                 android:text="@string/article_headline"
                 android:textAppearance="@style/ArticleTitleText"
                 app:layout_constraintBottom_toBottomOf="@+id/article_image"
-                app:layout_constraintEnd_toEndOf="@+id/article_image"
+                app:layout_constraintEnd_toStartOf="@+id/article_time"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/article_image" />
 
@@ -95,6 +97,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/backgroundColorOverlay"
+                android:maxLines="3"
+                android:minLines="3"
+                android:ellipsize="end"
                 android:paddingBottom="@dimen/margin_s"
                 android:paddingEnd="@dimen/margin_s"
                 android:paddingStart="@dimen/margin_s"

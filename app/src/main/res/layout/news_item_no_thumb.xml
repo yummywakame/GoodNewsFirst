@@ -98,6 +98,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/backgroundColorOverlay"
+                android:maxLines="3"
+                android:ellipsize="end"
                 android:paddingBottom="@dimen/margin_s"
                 android:paddingEnd="@dimen/margin_s"
                 android:paddingStart="@dimen/margin_s"
