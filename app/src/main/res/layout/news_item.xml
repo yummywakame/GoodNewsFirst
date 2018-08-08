@@ -79,6 +79,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:ellipsize="end"
+                android:gravity="bottom"
                 android:letterSpacing="0.05"
                 android:maxLines="3"
                 android:paddingBottom="@dimen/margin_s"
@@ -88,7 +89,7 @@
                 android:text="@string/article_headline"
                 android:textAppearance="@style/ArticleTitleText"
                 app:layout_constraintBottom_toBottomOf="@+id/article_image"
-                app:layout_constraintEnd_toStartOf="@+id/article_time"
+                app:layout_constraintEnd_toEndOf="@+id/article_image"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/article_image" />
 

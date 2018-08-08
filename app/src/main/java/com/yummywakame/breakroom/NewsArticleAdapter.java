@@ -128,8 +128,9 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
             photoView.setImageBitmap(newsPhoto);
         } else {
             // Remove photo and change layout:
-            // Increase Title maxlines from 3 to 4
+            // Increase Title maxlines and minlines from 3 to 4
             titleView.setMaxLines(4);
+            titleView.setMinLines(4);
 
             // target and shorten the aspect-ratio for photoView
             ConstraintLayout constraintLayout = listItemView.findViewById(R.id.newslist_constraint_layout);
@@ -141,7 +142,11 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
             photoView.setImageResource(R.color.backgroundColorOverlayBlack);
 
             // clip end of article_title to start of article_time (bookmark)
-            set.connect(R.id.article_title,ConstraintSet.END,R.id.article_time,ConstraintSet.END,0);
+            // The following breaks the constraint connection.
+            set.clear(R.id.article_title,ConstraintSet.END);
+            // The following attaches a new constraint connection.
+            set.connect(R.id.article_title,ConstraintSet.END,R.id.article_time,ConstraintSet.START,0);
+            set.applyTo(constraintLayout);
         }
 
         // Return the list item view that is now showing the appropriate data
