@@ -15,20 +15,14 @@
  */
 package com.yummywakame.breakroom;
 
-import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.preference.SwitchPreference;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.util.TypedValue;
-import android.view.ViewGroup;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -47,9 +41,6 @@ public class SettingsActivity extends AppCompatActivity {
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.settings_main);
-            // topics preference
-            Preference topic = findPreference(getString(R.string.pref_topic_key));
-            setPreferenceSummary(topic);
             // order by preference
             Preference orderBy = findPreference(getString(R.string.pref_order_by_key));
             setPreferenceSummary(orderBy);

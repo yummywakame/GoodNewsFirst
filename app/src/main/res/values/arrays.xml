@@ -10,6 +10,11 @@
         <item>@string/pref_order_by_oldest_value</item>
         <item>@string/pref_order_by_relevance_value</item>
     </string-array>
+    <string-array name="pref_order_by_urls">
+        <item>@string/pref_order_by_newest_url</item>
+        <item>@string/pref_order_by_oldest_url</item>
+        <item>@string/pref_order_by_relevance_url</item>
+    </string-array>
     <string-array name="pref_topic_labels">
         <item>@string/pref_topic_0_label</item>
         <item>@string/pref_topic_1_label</item>
@@ -47,5 +52,24 @@
         <item>@string/pref_topic_14_label_value</item>
         <item>@string/pref_topic_15_label_value</item>
         <item>@string/pref_topic_16_label_value</item>
+    </string-array>
+    <string-array name="pref_topic_urls">
+        <item>@string/pref_topic_0_label_url</item>
+        <item>@string/pref_topic_1_label_url</item>
+        <item>@string/pref_topic_2_label_url</item>
+        <item>@string/pref_topic_3_label_url</item>
+        <item>@string/pref_topic_4_label_url</item>
+        <item>@string/pref_topic_5_label_url</item>
+        <item>@string/pref_topic_6_label_url</item>
+        <item>@string/pref_topic_7_label_url</item>
+        <item>@string/pref_topic_8_label_url</item>
+        <item>@string/pref_topic_9_label_url</item>
+        <item>@string/pref_topic_10_label_url</item>
+        <item>@string/pref_topic_11_label_url</item>
+        <item>@string/pref_topic_12_label_url</item>
+        <item>@string/pref_topic_13_label_url</item>
+        <item>@string/pref_topic_14_label_url</item>
+        <item>@string/pref_topic_15_label_url</item>
+        <item>@string/pref_topic_16_label_url</item>
     </string-array>
 </resources>

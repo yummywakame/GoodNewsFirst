@@ -7,7 +7,8 @@
             android:entries="@array/pref_order_by_labels"
             android:entryValues="@array/pref_order_by_values"
             android:key="@string/pref_order_by_key"
-            android:title="@string/pref_order_by_title" />
+            android:title="@string/pref_order_by_title"
+            android:summary="%s"/>
 
         <ListPreference
             android:defaultValue="@string/pref_topic_default"
@@ -15,7 +16,8 @@
             android:entryValues="@array/pref_topic_values"
             android:key="@string/pref_topic_key"
             android:title="@string/pref_topic_title"
-            android:dialogTitle="@string/pref_topic_title"/>
+            android:dialogTitle="@string/pref_topic_title"
+            android:summary="%s"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/metadata_category">
@@ -24,14 +26,16 @@
             android:key="@string/pref_thumbnail_key"
             android:summaryOff="@string/pref_thumbnail_summary_off"
             android:summaryOn="@string/pref_thumbnail_summary_on"
-            android:title="@string/pref_thumbnail_title" />
+            android:title="@string/pref_thumbnail_title"
+            android:summary="%s"/>
 
         <CheckBoxPreference
             android:defaultValue="@bool/pref_contributors_default"
             android:key="@string/pref_contributors_key"
             android:summaryOff="@string/pref_contributors_summary_off"
             android:summaryOn="@string/pref_contributors_summary_on"
-            android:title="@string/pref_contributors_title" />
+            android:title="@string/pref_contributors_title"
+            android:summary="%s"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

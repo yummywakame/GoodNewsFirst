@@ -26,6 +26,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -65,11 +66,6 @@ public class MainActivity extends AppCompatActivity
      * TextView that is displayed when the list is empty
      */
     private TextView mEmptyStateTextView;
-
-    /**
-     * ProgressBar Spinner that is displayed while data is being downloaded
-     */
-    private LoaderManager loaderManager;
 
     /**
      * Swipe to reload spinner that is displayed while data is being downloaded
@@ -153,71 +149,21 @@ public class MainActivity extends AppCompatActivity
 
         // Get User Preferences or Defaults from Settings
         String SECTION_CHOICE = getPreferenceStringValue(R.string.pref_topic_key, R.string.pref_topic_default);
-//    String orderBy = getPreferenceStringValue(R.string.pref_order_by_key, R.string.pref_order_by_default);
+
+
+        //String MY_SECTION_CHOICE = getResources().getStringArray(R.array.pref_topic_urls)[R.string.pref_topic_key];
+        // LOG the API URL
+        Log.i(LOG_TAG, "pref_topic_urls: " + getResources().getStringArray(R.array.pref_topic_urls)[0]);
+
+        String ORDER_BY = getPreferenceStringValue(R.string.pref_order_by_key, R.string.pref_order_by_default);
 //    boolean hasThumbnails = getPreferenceBooleanValue(R.string.pref_thumbnail_key, R.bool.pref_thumbnail_default);
 //    boolean hasContributors = getPreferenceBooleanValue(R.string.pref_contributors_key, R.bool.pref_contributors_default);
-        String GUARDIAN_REQUEST_URL;
-        switch(SECTION_CHOICE){
-            case "TAG_GOODNEWS":
-                // Construct the API URL to query the Guardian Dataset
-                GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.TAG_GOODNEWS);
-                break;
-            case "SECTION_US_NEWS":
-                GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.SECTION_US_NEWS);
-                break;
-            case "SECTION_WORLD_NEWS":
-                GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.SECTION_WORLD_NEWS);
-                break;
-            case "SECTION_SPORT":
-                GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.SECTION_SPORT);
-                break;
-            case "SECTION_BUSINESS":
-                GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.SECTION_BUSINESS);
-                break;
-            case "SECTION_POLITICS":
-                GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.SECTION_POLITICS);
-                break;
-            case "SECTION_TECHNOLOGY":
-                GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.SECTION_TECHNOLOGY);
-                break;
-            case "SECTION_ART_AND_DESIGN":
-                GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.SECTION_ART_AND_DESIGN);
-                break;
-            case "SECTION_CULTURE":
-                GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.SECTION_CULTURE);
-                break;
-            case "SECTION_EDUCATION":
-                GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.SECTION_EDUCATION);
-                break;
-            case "SECTION_ENVIRONMENT":
-                GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.SECTION_ENVIRONMENT);
-                break;
-            case "SECTION_FILM":
-                GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.SECTION_FILM);
-                break;
-            case "SECTION_LIFEANDSTYLE":
-                GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.SECTION_LIFEANDSTYLE);
-                break;
-            case "SECTION_MUSIC":
-                GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.SECTION_MUSIC);
-                break;
-            case "SECTION_SCIENCE":
-                GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.SECTION_SCIENCE);
-                break;
-            case "SECTION_TRAVEL":
-                GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.SECTION_TRAVEL);
-                break;
-            case "SECTION_WOMEN_IN_LEADERSHIP":
-                GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.SECTION_WOMEN_IN_LEADERSHIP);
-                break;
-            default:
-                // Defaults to Good News
-                GUARDIAN_REQUEST_URL = UrlConstructor.constructUrl(UrlConstructor.TAG_GOODNEWS);
-                break;
-        }
+
+        // Construct the API URL to query the Guardian Dataset
+        String GUARDIAN_SECTION = UrlConstructor.constructUrl(SECTION_CHOICE, ORDER_BY);
 
         // Create a new loader for the given URL
-        return new NewsArticleLoader(this, GUARDIAN_REQUEST_URL);
+        return new NewsArticleLoader(this, GUARDIAN_SECTION);
     }
 
     @Override
