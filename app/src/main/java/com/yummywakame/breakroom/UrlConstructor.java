@@ -3,9 +3,6 @@ package com.yummywakame.breakroom;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * GoodNewsFirst
  * Created by Olivia Meiring on 2018/08/02.
@@ -23,13 +20,11 @@ public final class UrlConstructor {
     // Extras at the end of the URL string
     private static final String URL_EXTRAS = "&show-fields=headline,trailText,shortUrl,thumbnail,byline";
 
-
     /**
      * API Key Value which you need to store in your gradle.properties file as:
      * GoodNewsFirst_GuardianApp_ApiKey="YOUR-API-KEY-HERE"
      */
     private static final String apiKey = BuildConfig.ApiKey;
-    // URL API Key
     private static final String URL_API_KEY = "&api-key=" + apiKey;
 
     /**
@@ -55,14 +50,15 @@ public final class UrlConstructor {
             stringBuilder.append("&order-by="
                     + orderBy);
         } else {
+            // order by newest articles by default if no preference set
             stringBuilder.append("&order-by="
                     + MyApplication.getAppContext().getResources().getString(R.string.pref_order_by_default));
         }
 
-        // Add the extras
+        // Add the extras to the query
         stringBuilder.append(URL_EXTRAS);
 
-        // Add the API Key
+        // Add the API Key to the end of the query
         stringBuilder.append(URL_API_KEY);
 
         // LOG the API URL
@@ -70,5 +66,4 @@ public final class UrlConstructor {
 
         return stringBuilder.toString();
     }
-
 }

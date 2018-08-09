@@ -31,7 +31,6 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         setTheme(R.style.SettingsFragmentTheme);
-
     }
 
     public static class NewsPreferenceFragment extends PreferenceFragment
@@ -41,7 +40,7 @@ public class SettingsActivity extends AppCompatActivity {
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.settings_main);
-            // order by preference
+            // Order articles by user's preference
             Preference orderBy = findPreference(getString(R.string.pref_order_by_key));
             setPreferenceSummary(orderBy);
         }
@@ -73,5 +72,4 @@ public class SettingsActivity extends AppCompatActivity {
             onPreferenceChange(preference, preferenceValue);
         }
     }
-
 }

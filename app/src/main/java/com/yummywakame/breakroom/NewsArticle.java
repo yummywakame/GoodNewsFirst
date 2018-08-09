@@ -41,7 +41,8 @@ public class NewsArticle {
      * @param byLine             Author of the article
      * @param thumbnail          Url to the thumbnail of the article
      */
-    public NewsArticle(String webSectionName, String webPublicationDate, String webTitle, String webTrailText, String webUrl, String byLine, Bitmap thumbnail) {
+    public NewsArticle(String webSectionName, String webPublicationDate, String webTitle,
+                       String webTrailText, String webUrl, String byLine, Bitmap thumbnail) {
         this.webSectionName = webSectionName;
         this.webPublicationDate = webPublicationDate;
         this.webTitle = webTitle;

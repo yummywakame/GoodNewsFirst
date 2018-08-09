@@ -70,27 +70,22 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         // Find the article at the given position in the list of articles
         NewsArticle currentNewsArticle = getItem(position);
 
-        // Get the Section name from the NewsArticle object
+        // Get and display the article's Section
         String newsSection = currentNewsArticle.getSectionName();
-        // Find the TextView with view ID article_title
         TextView sectionNameView = listItemView.findViewById(R.id.article_section);
-        // Display the location of the current article in that TextView
         sectionNameView.setText(newsSection);
 
-        // Get the title from the NewsArticle object
+        // Get and display the article's Title
         String newsTitle = currentNewsArticle.getTitle();
-        // Find the TextView with view ID article_title
         TextView titleView = listItemView.findViewById(R.id.article_title);
-        // Display the location of the current article in that TextView
         titleView.setText(newsTitle);
 
-        // Get the trailtext from the NewsArticle object
+        // Get and display the article's Trail Text
         String newsTrail = currentNewsArticle.getTrailText();
-        // Find the TextView with view ID trail article_trailtext
         TextView trailView = listItemView.findViewById(R.id.article_trailtext);
         // Display the trailtext for the current article in that TextView or hide it if null
         if (newsTrail != null && !newsTrail.isEmpty()) {
-            newsTrail = newsTrail+".";
+            newsTrail = newsTrail + ".";
             trailView.setText(newsTrail);
         } else {
             trailView.setVisibility(View.GONE);
@@ -99,38 +94,32 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         // Create a new Date object from the time in milliseconds of the article
         // Format the article_date string (i.e. "Mar 3, '18")
         String formattedDate = formatDate(currentNewsArticle.getPublishedDate());
-        // Find the TextView with view ID article_date
+        // Find and display the article's Date
         TextView dateView = listItemView.findViewById(R.id.article_date);
-        // Display the article_date of the current article in that TextView
         dateView.setText(formattedDate);
 
         // Format the time string (i.e. "4:30 PM")
         String formattedTime = formatTime(currentNewsArticle.getPublishedDate());
-        // Find the TextView with view ID article_time
+        // Find and display the article's Time
         TextView timeView = listItemView.findViewById(R.id.article_time);
-        // Display the time of the current article in that TextView
         timeView.setText(formattedTime);
 
-        // Get the author from the NewsArticle object
+        // Get and display the article's Author
         String newsAuthor = currentNewsArticle.getAuthor() + " ";
-        // Find the TextView with view ID article_author
         TextView authorView = listItemView.findViewById(R.id.article_author);
-        // Display the location of the current article in that TextView
         authorView.setText(newsAuthor);
 
-        // Get the Bitmap image from the NewsArticle object
+        // Find and display the article's Thumbnail
         Bitmap newsPhoto = currentNewsArticle.getThumbnail();
-        // Find the ImageView with the ID article_image
         ImageView photoView = listItemView.findViewById(R.id.article_image);
-        // Display the image in that ImageView
-        if (newsPhoto != null && NewsArticleLoader.mPrefThumbnail ) {
+        if (newsPhoto != null && NewsArticleLoader.mPrefThumbnail) {
             // If photo available or Thumbnail preference is true
 
             // Set Title maxlines and minlines to 3
             titleView.setMaxLines(3);
             titleView.setMinLines(3);
 
-            // target and shorten the aspect-ratio for photoView
+            // target and increase the aspect-ratio for photoView to 16:9
             ConstraintLayout constraintLayout = listItemView.findViewById(R.id.newslist_constraint_layout);
             ConstraintSet set = new ConstraintSet();
             set.clone(constraintLayout);
@@ -138,11 +127,11 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
             set.applyTo(constraintLayout);
             photoView.setImageBitmap(newsPhoto);
 
-            // clip end of article_title to end of article_image
-            // The following breaks the constraint connection.
-            set.clear(R.id.article_title,ConstraintSet.START);
-            // The following attaches a new constraint connection.
-            set.connect(R.id.article_title,ConstraintSet.END,R.id.article_image,ConstraintSet.END,0);
+            // To clip the end of the article_title to end of the article_image (thumbnail):
+            // First break the existing constraint connection.
+            set.clear(R.id.article_title, ConstraintSet.START);
+            // Then attach a new constraint connection.
+            set.connect(R.id.article_title, ConstraintSet.END, R.id.article_image, ConstraintSet.END, 0);
             set.applyTo(constraintLayout);
 
         } else {
@@ -151,21 +140,21 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
             titleView.setMaxLines(4);
             titleView.setMinLines(4);
 
-            // target and shorten the aspect-ratio for photoView
+            // target and decrease the aspect-ratio for photoView to 16:4
             ConstraintLayout constraintLayout = listItemView.findViewById(R.id.newslist_constraint_layout);
             ConstraintSet set = new ConstraintSet();
             set.clone(constraintLayout);
             set.setDimensionRatio(photoView.getId(), "16:4");
             set.applyTo(constraintLayout);
-            // set background color
+            // set background color in lieu of thumbnail image
             photoView.setImageResource(R.color.backgroundColorOverlayBlack);
 
-            // clip end of article_title to start of article_time (bookmark)
-            // The following breaks the constraint connection.
-            set.clear(R.id.article_title,ConstraintSet.END);
-            // The following attaches a new constraint connection.
-            set.connect(R.id.article_title,ConstraintSet.END,R.id.article_time,ConstraintSet.START,0);
-            set.connect(R.id.article_title,ConstraintSet.START,R.id.article_image,ConstraintSet.START,0);
+            // To clip the end of article_title to start of article_time (bookmark):
+            // First break the constraint connection.
+            set.clear(R.id.article_title, ConstraintSet.END);
+            // Then attach a new constraint connection.
+            set.connect(R.id.article_title, ConstraintSet.END, R.id.article_time, ConstraintSet.START, 0);
+            set.connect(R.id.article_title, ConstraintSet.START, R.id.article_image, ConstraintSet.START, 0);
             set.applyTo(constraintLayout);
         }
 

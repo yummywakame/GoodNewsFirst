@@ -16,7 +16,6 @@
 package com.yummywakame.breakroom;
 
 import android.app.LoaderManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
@@ -26,7 +25,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,11 +38,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<NewsArticle>> {
-
-    /**
-     * Tag for the log messages
-     */
-    private static final String LOG_TAG = MainActivity.class.getSimpleName() + " - LOG";
 
     /**
      * Constant value for the article loader ID. We can choose any integer.
@@ -146,7 +139,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public Loader<List<NewsArticle>> onCreateLoader(int i, Bundle bundle) {
-
         // Get User Preferences or Defaults from Settings
         String SECTION_CHOICE = getPreferenceStringValue(R.string.pref_topic_key, R.string.pref_topic_default);
         String ORDER_BY = getPreferenceStringValue(R.string.pref_order_by_key, R.string.pref_order_by_default);
@@ -161,10 +153,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(Loader<List<NewsArticle>> loader, List<NewsArticle> newsArticles) {
-
         // Hide swipe to reload spinner
         swipeContainer.setRefreshing(false);
-
 
         // Set empty state text to display "No news articles found."
         mEmptyStateTextView.setText(R.string.no_articles);
@@ -181,8 +171,8 @@ public class MainActivity extends AppCompatActivity
                 // Set empty state text to display "No articles found."
                 mEmptyStateTextView.setText(R.string.no_articles);
             } else {
-                // Update empty state with no connection error message
-                mEmptyStateTextView.setText(R.string.no_internet_connection);
+                // Update toast with no connection error message
+                Toast.makeText(getApplicationContext(), R.string.no_internet_connection, Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -224,6 +214,10 @@ public class MainActivity extends AppCompatActivity
     public void loadData() {
         // If there is a network connection, fetch data
         if (NewsQueryUtils.isConnected(getBaseContext())) {
+            // destroy old loader to get new info
+            getLoaderManager().destroyLoader(1);
+            // Clear any potential messages on screen
+            mEmptyStateTextView.setText("");
             // Initialize the loader. Pass in the int ID constant defined above and pass in null for
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
@@ -234,20 +228,17 @@ public class MainActivity extends AppCompatActivity
             // First, hide loading indicator so error message will be visible
             swipeContainer.setRefreshing(false);
 
-            // Update empty state with no connection error message
-            mEmptyStateTextView.setText(R.string.no_internet_connection);
-            Toast.makeText(getApplicationContext(), R.string.no_internet_connection, Toast.LENGTH_LONG).show();
-
+            // Update toast with no connection error message
+            Toast.makeText(MyApplication.getAppContext(), R.string.no_internet_connection, Toast.LENGTH_LONG).show();
         }
     }
-
 
     /**
      * A helper method to extract current preference String value
      *
      * @param key          preference's key
      * @param defaultValue preference's default value
-     * @return preference current value
+     * @return preference  current value
      */
     public String getPreferenceStringValue(int key, int defaultValue) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -262,7 +253,7 @@ public class MainActivity extends AppCompatActivity
      *
      * @param key          preference's key
      * @param defaultValue preference's default value
-     * @return preference current value
+     * @return preference  current value
      */
     public boolean getPreferenceBooleanValue(int key, int defaultValue) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);

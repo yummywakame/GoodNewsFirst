@@ -23,6 +23,7 @@ import android.util.Log;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -137,7 +138,7 @@ public final class NewsQueryUtils {
                 // Closing the input stream could throw an IOException, which is why
                 // the makeHttpRequest(URL url) method signature specifies than an IOException
                 // could be thrown.
-                Log.v(LOG_TAG, "inputStream != null. closing input stream.");
+                Log.v(LOG_TAG, "inputStream != null. Closing input stream.");
                 inputStream.close();
             }
         }
@@ -234,6 +235,8 @@ public final class NewsQueryUtils {
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
             Log.e(LOG_TAG, "NewsQueryUtils: Problem parsing the article JSON results", e);
+            // Notify the user in a toast
+            Toast.makeText(MyApplication.getAppContext(), R.string.no_json_ok_response, Toast.LENGTH_LONG).show();
         }
 
         // Return the list of newsArticles
@@ -262,7 +265,6 @@ public final class NewsQueryUtils {
         if (!"".equals(originalUrl)) {
             String newUrl = originalUrl.replace
                     (originalUrl.substring(originalUrl.lastIndexOf("/")), "/1000.jpg");
-
             try {
                 // see if the higher-res image exists
                 InputStream inputStream = new URL(newUrl).openStream();
