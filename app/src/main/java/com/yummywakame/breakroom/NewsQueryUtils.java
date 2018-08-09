@@ -53,7 +53,7 @@ public final class NewsQueryUtils {
     /**
      * Tag for the log messages
      */
-    private static final String LOG_TAG = NewsQueryUtils.class.getSimpleName() + " - LOG";
+    private static final String LOG_TAG = "NewsQueryUtils";
 
     /**
      * Create a private constructor because no one should ever create a {@link NewsQueryUtils} object.
@@ -106,6 +106,7 @@ public final class NewsQueryUtils {
 
         // If the URL is null, then return early.
         if (url == null) {
+            Log.v(LOG_TAG, "jsonResponse: " + jsonResponse);
             return jsonResponse;
         }
 
