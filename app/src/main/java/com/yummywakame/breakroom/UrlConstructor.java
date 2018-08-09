@@ -21,7 +21,7 @@ public final class UrlConstructor {
     private static final String URL_BASE = "https://content.guardianapis.com/search?";
 
     // Extras at the end of the URL string
-    private static final String URL_EXTRAS = "&show-fields=all";
+    private static final String URL_EXTRAS = "&show-fields=headline,trailText,shortUrl,thumbnail,byline";
 
 
     /**

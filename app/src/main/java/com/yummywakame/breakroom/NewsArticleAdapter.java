@@ -125,7 +125,26 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         // Display the image in that ImageView
         if (newsPhoto != null && NewsArticleLoader.mPrefThumbnail ) {
             // If photo available or Thumbnail preference is true
+
+            // Set Title maxlines and minlines to 3
+            titleView.setMaxLines(3);
+            titleView.setMinLines(3);
+
+            // target and shorten the aspect-ratio for photoView
+            ConstraintLayout constraintLayout = listItemView.findViewById(R.id.newslist_constraint_layout);
+            ConstraintSet set = new ConstraintSet();
+            set.clone(constraintLayout);
+            set.setDimensionRatio(photoView.getId(), "16:9");
+            set.applyTo(constraintLayout);
             photoView.setImageBitmap(newsPhoto);
+
+            // clip end of article_title to end of article_image
+            // The following breaks the constraint connection.
+            set.clear(R.id.article_title,ConstraintSet.START);
+            // The following attaches a new constraint connection.
+            set.connect(R.id.article_title,ConstraintSet.END,R.id.article_image,ConstraintSet.END,0);
+            set.applyTo(constraintLayout);
+
         } else {
             // Remove photo and change layout:
             // Increase Title maxlines and minlines from 3 to 4
@@ -146,6 +165,7 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
             set.clear(R.id.article_title,ConstraintSet.END);
             // The following attaches a new constraint connection.
             set.connect(R.id.article_title,ConstraintSet.END,R.id.article_time,ConstraintSet.START,0);
+            set.connect(R.id.article_title,ConstraintSet.START,R.id.article_image,ConstraintSet.START,0);
             set.applyTo(constraintLayout);
         }
 

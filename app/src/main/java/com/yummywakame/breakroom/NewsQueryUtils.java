@@ -209,7 +209,7 @@ public final class NewsQueryUtils {
                 //          getString() will throw exception when it fails.
 
                 webSectionName = currentArticle.optString("sectionName");
-                webPublicationDate = currentArticle.getString("webPublicationDate");
+                webPublicationDate = currentArticle.optString("webPublicationDate");
                 webTitle = jsonObjectFields.getString("headline");
                 webTrailText = jsonObjectFields.optString("trailText");
                 webUrl = jsonObjectFields.getString("shortUrl");
