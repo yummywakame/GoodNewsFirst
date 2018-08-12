@@ -2,7 +2,7 @@
 <resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:navigationBarColor">@android:color/black</item>\
+        <item name="android:navigationBarColor">@color/primaryColor</item>
         <item name="android:windowBackground">@color/backgroundColor</item>
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDark</item>

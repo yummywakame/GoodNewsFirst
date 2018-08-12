@@ -12,6 +12,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/backgroundColor">
 
     <!-- Splash logo -->
@@ -50,48 +51,74 @@
         android:gravity="center_horizontal"
         android:textAppearance="@style/SplashEmptyText" />
 
-    <!-- Custom toolbar for custom fonts and images -->
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/main_toolbar"
+    <!-- AppBarLayout adds the drop shadow below the toolbar -->
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/primaryColor"
-        android:minHeight="?attr/actionBarSize">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <!-- Custom toolbar for custom fonts and images -->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/main_toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:background="@color/primaryColor"
+            android:minHeight="?attr/actionBarSize">
 
-            <ImageView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginBottom="@dimen/margin_s"
-                android:layout_marginTop="@dimen/margin_s"
-                android:contentDescription="@string/image_desc_app_logo"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_thumb_up" />
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="@dimen/margin_s"
+                    android:layout_marginTop="@dimen/margin_s"
+                    android:contentDescription="@string/image_desc_app_logo"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/g_logo"/>
+
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/text_size_s"
+                    android:layout_marginStart="@dimen/text_size_s"
+                    android:includeFontPadding="false"
+                    android:text="@string/app_name"
+                    android:textAppearance="@style/AppTitleText"/>
+
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/menuTitleBackground">
 
             <TextView
-                android:id="@+id/toolbar_title"
-                android:layout_width="wrap_content"
+                android:id="@+id/toolbar_subtitle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/text_size_m"
-                android:layout_marginStart="@dimen/text_size_m"
+                android:layout_marginBottom="@dimen/text_size_xs"
+                android:layout_marginTop="@dimen/text_size_xs"
                 android:includeFontPadding="false"
-                android:text="@string/app_name"
-                android:textAppearance="@style/AppTitleText" />
+                android:text="@string/pref_topic_0_label"
+                android:textAlignment="center"
+                android:textAppearance="@style/AppSubTitleText"
+                android:letterSpacing="0.05"/>
 
         </LinearLayout>
-    </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="?android:attr/actionBarSize">
+        android:layout_marginTop="97dp">
 
         <ListView
             android:id="@+id/list"
@@ -102,7 +129,8 @@
             android:divider="@null"
             android:dividerHeight="0dp"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/margin_s" />
+            android:paddingBottom="@dimen/margin_s"
+            tools:listitem="@layout/news_item"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

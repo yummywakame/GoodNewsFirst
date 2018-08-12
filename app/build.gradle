@@ -33,6 +33,7 @@ dependencies {
     implementation 'com.android.support:support-compat:27.1.1'
     implementation 'com.android.support:preference-v14:27.1.1'
     implementation 'com.android.support:support-fragment:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
     testImplementation 'junit:junit:4.12'
     // jsoup HTML parser library @ https://jsoup.org/
     implementation 'org.jsoup:jsoup:1.11.3'

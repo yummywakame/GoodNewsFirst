@@ -23,8 +23,12 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 public class SettingsActivity extends AppCompatActivity {
+
+    // Tag for the log messages
+    private static final String LOG_TAG = SettingsActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,14 @@ public class SettingsActivity extends AppCompatActivity {
             // Order articles by user's preference
             Preference orderBy = findPreference(getString(R.string.pref_order_by_key));
             setPreferenceSummary(orderBy);
+
+            // Get user's section preference
+            Preference chosenSection = findPreference(getString(R.string.pref_topic_key));
+            setPreferenceSummary(chosenSection);
+
+            // LOG chosen variables
+            Log.i(LOG_TAG, "Variable chosenSection: " + chosenSection );
+            Log.i(LOG_TAG, "Variable orderBy: " + orderBy );
         }
 
         @Override
@@ -70,6 +82,7 @@ public class SettingsActivity extends AppCompatActivity {
                     ""
             );
             onPreferenceChange(preference, preferenceValue);
+
         }
     }
 }

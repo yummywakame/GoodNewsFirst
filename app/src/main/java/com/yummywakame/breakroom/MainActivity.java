@@ -16,6 +16,7 @@
 package com.yummywakame.breakroom;
 
 import android.app.LoaderManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
@@ -25,16 +26,19 @@ import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<NewsArticle>> {
@@ -82,7 +86,6 @@ public class MainActivity extends AppCompatActivity
         // Lookup the swipe container view
         swipeContainer = findViewById(R.id.swipeContainer);
         swipeContainer.setRefreshing(true);
-
 
         // Find a reference to the {@link ListView} in the layout
         articleListView = findViewById(R.id.list);
@@ -132,9 +135,7 @@ public class MainActivity extends AppCompatActivity
         // Configure the refreshing colors
         swipeContainer.setColorSchemeResources(
                 R.color.primaryHilight,
-                R.color.secondaryHilight,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light);
+                R.color.secondaryHilight);
     }
 
     @Override
@@ -143,6 +144,13 @@ public class MainActivity extends AppCompatActivity
         String SECTION_CHOICE = getPreferenceStringValue(R.string.pref_topic_key, R.string.pref_topic_default);
         String ORDER_BY = getPreferenceStringValue(R.string.pref_order_by_key, R.string.pref_order_by_default);
         boolean PREF_THUMBNAIL = getPreferenceBooleanValue(R.string.pref_thumbnail_key, R.bool.pref_thumbnail_default);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MyApplication.getAppContext());
+        String myStrValue = prefs.getString(SECTION_CHOICE, "defaultStringIfNothingFound");
+
+        // Change the Subtitle to Section Choice
+        TextView SectionTitle = findViewById(R.id.toolbar_subtitle);
+        SectionTitle.setText(SECTION_CHOICE);
 
         // Construct the API URL to query the Guardian Dataset
         String GUARDIAN_SECTION = UrlConstructor.constructUrl(SECTION_CHOICE, ORDER_BY);
