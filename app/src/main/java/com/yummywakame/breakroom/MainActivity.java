@@ -145,9 +145,6 @@ public class MainActivity extends AppCompatActivity
         String ORDER_BY = getPreferenceStringValue(R.string.pref_order_by_key, R.string.pref_order_by_default);
         boolean PREF_THUMBNAIL = getPreferenceBooleanValue(R.string.pref_thumbnail_key, R.bool.pref_thumbnail_default);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MyApplication.getAppContext());
-        String myStrValue = prefs.getString(SECTION_CHOICE, "defaultStringIfNothingFound");
-
         // Change the Subtitle to Section Choice
         TextView SectionTitle = findViewById(R.id.toolbar_subtitle);
         SectionTitle.setText(SECTION_CHOICE);
