@@ -147,7 +147,8 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
             set.setDimensionRatio(photoView.getId(), "16:4");
             set.applyTo(constraintLayout);
             // set background color in lieu of thumbnail image
-            photoView.setImageResource(R.color.backgroundColorOverlayBlack);
+            photoView.setImageResource(R.drawable.no_thumbnail_bg);
+            photoView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
             // To clip the end of article_title to start of article_time (bookmark):
             // First break the constraint connection.

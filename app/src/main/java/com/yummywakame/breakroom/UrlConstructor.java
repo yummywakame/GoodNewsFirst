@@ -62,7 +62,7 @@ public final class UrlConstructor {
         stringBuilder.append(URL_API_KEY);
 
         // LOG the API URL
-        Log.i(LOG_TAG, "API GUARDIAN_REQUEST_URL: "+ stringBuilder.toString());
+        Log.i(LOG_TAG, "API GUARDIAN_REQUEST_URL: " + stringBuilder.toString());
 
         return stringBuilder.toString();
     }

@@ -10,15 +10,15 @@
 
     <!-- Top Toolbar TitleView Text -->
     <style name="AppTitleText" parent="@style/TextAppearance.AppCompat.Title">
-        <item name="android:fontFamily">@font/libre_baskerville</item>
+        <item name="android:fontFamily">@font/ubuntu</item>
         <item name="android:textSize">@dimen/text_size_apptitle</item>
         <item name="android:textColor">@color/secondaryHilight</item>
     </style>
 
     <!-- Toolbar SubTitleView Text -->
     <style name="AppSubTitleText" parent="@style/TextAppearance.AppCompat.Title">
-        <item name="android:fontFamily">@font/libre_baskerville</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">@font/libre_baskerville_bold</item>
+        <item name="android:textColor">@color/backgroundColor</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textSize">@dimen/text_size_s</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
@@ -55,7 +55,7 @@
 
     <!-- Article Title TextView -->
     <style name="ArticleTitleText" parent="@style/TextAppearance.AppCompat.Body1">
-        <item name="android:fontFamily">@font/libre_baskerville</item>
+        <item name="android:fontFamily">@font/libre_baskerville_bold</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textSize">@dimen/text_size_s</item>
         <item name="android:textColor">@color/primaryTextColor</item>
@@ -84,15 +84,17 @@
         <item name="android:textColorPrimary">@color/primaryTextColor</item>
         <item name="android:textColorSecondary">@color/primaryLight</item>
         <item name="android:fontFamily">@font/ubuntu</item>
+        <item name="android:textSize">@dimen/text_size_m</item>
         <!-- Dialog Styles -->
         <item name="android:dialogTheme">@style/DialogStyle</item>
         <item name="android:alertDialogTheme">@style/DialogStyle</item>
     </style>
     <!-- Settings Dialog Styles -->
     <style name="DialogStyle" parent="@style/Theme.AppCompat.Dialog">
-        <item name="android:textColorPrimary">@color/primaryHilight</item>
+        <item name="android:textColorPrimary">@color/secondaryHilight</item>
         <item name="android:background">@color/backgroundColor</item>
-        <item name="colorAccent">@color/secondaryHilight</item>
+        <item name="colorAccent">@color/primaryHilight</item>
+        <item name="android:textSize">@dimen/text_size_m</item>
     </style>
 
 </resources>
