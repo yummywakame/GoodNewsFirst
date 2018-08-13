@@ -1,5 +1,5 @@
-## Grow With Google Android Basics Nanodegree: PROJECT 6
-# News App Part 1 - Good News First
+## Grow With Google Android Basics Nanodegree: PROJECT 6 & 7
+# News App Part 1 & Part 2 - Good News First
 
 Used **API 27: Android 8.1 (Oreo)**
 
