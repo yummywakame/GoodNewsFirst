@@ -37,7 +37,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity
@@ -147,7 +149,7 @@ public class MainActivity extends AppCompatActivity
 
         // Change the Subtitle to Section Choice
         TextView SectionTitle = findViewById(R.id.toolbar_subtitle);
-        SectionTitle.setText(SECTION_CHOICE);
+        SectionTitle.setText(HashMapper.urlToLabel(SECTION_CHOICE));
 
         // Construct the API URL to query the Guardian Dataset
         String GUARDIAN_SECTION = UrlConstructor.constructUrl(SECTION_CHOICE, ORDER_BY);
