@@ -4,13 +4,15 @@
 Used **API 27: Android 8.1 (Oreo)**
 
 ## Screenshots
-Coming soon!
+![Good News First App Screenshots](./screenshots-layout.png)
 
 ## Walkthrough
-Coming soon!
+<a href="https://www.youtube.com/watch?v=NwXAVNIu6yg" target="_blank"><img src="./maxresdefault.jpg" alt="Good News First News App Demo" width="740" height="391" border="10" /></a>
 
-## Additional Features
-Coming soon!
+_[Watch on YouTube](https://www.youtube.com/watch?v=NwXAVNIu6yg)_
+
+## Project Rubric
+Create a news app from the Guardian API that displays multiple news stories. The app queries the content.guardianapis.com API using JSON to fetch news stories related to the topic chosen by the user, using an API key. Each story clicks through to its web url for the full story. The app should gracefully deal with older news articles that may not have a thumbnail or author. There should be a Settings Activity via the toolbar. The user's preferences should narrow the query down and change the results. The preferences should be stored on the device/data persistence. Network operations are done using Loader rather than AsyncTask.
 
 ## Resources
 
@@ -24,3 +26,8 @@ https://guides.codepath.com/android/implementing-pull-to-refresh-guide
 
 *Guardian Logo for attribution:*
 https://commons.wikimedia.org/wiki/File:The_Guardian_2018.svg
+
+*Music track:*
+Aljosha Konstanty - Discovery
+
+_Many thanks to <a href="https://github.com/gundamboy" target="_blank">Charles Rowland</a> for his help figuring out the trickier elements of this project._
