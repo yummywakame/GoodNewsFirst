@@ -7,9 +7,9 @@ Used **API 27: Android 8.1 (Oreo)**
 ![Good News First App Screenshots](./screenshots-layout.png)
 
 ## Walkthrough
-<a href="https://www.youtube.com/watch?v=NwXAVNIu6yg" target="_blank"><img src="./maxresdefault.jpg" alt="Good News First News App Demo" width="740" height="391" border="10" /></a>
+<a href="https://www.youtube.com/watch?v=v0DIsGFnqUE" target="_blank"><img src="./youtube.jpg" alt="Good News First News App Demo" width="800" height="450" border="10" /></a>
 
-_[Watch on YouTube](https://www.youtube.com/watch?v=NwXAVNIu6yg)_
+_[Watch on YouTube](https://www.youtube.com/watch?v=v0DIsGFnqUE)_
 
 ## Project Rubric
 Create a news app from the Guardian API that displays multiple news stories. The app queries the content.guardianapis.com API using JSON to fetch news stories related to the topic chosen by the user, using an API key. Each story clicks through to its web url for the full story. The app should gracefully deal with older news articles that may not have a thumbnail or author. There should be a Settings Activity via the toolbar. The user's preferences should narrow the query down and change the results. The preferences should be stored on the device/data persistence. Network operations are done using Loader rather than AsyncTask.
